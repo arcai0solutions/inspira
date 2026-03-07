@@ -56,7 +56,7 @@ export default function FAQ() {
     };
 
     return (
-        <section className="bg-[#FAFAFA] pt-16 md:pt-24 pb-24 px-4 md:px-12 w-full flex justify-center overflow-hidden">
+        <section className="bg-white pt-0 pb-24 px-4 md:px-12 w-full flex justify-center overflow-hidden">
             <div className="w-full max-w-[1400px] flex flex-col gap-12 md:gap-20">
 
                 {/* Header Lockup */}

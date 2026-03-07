@@ -23,32 +23,18 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="w-full bg-[#0A0A0A] px-2 md:px-4 py-2 md:py-4 pb-4 font-sans border-t border-white/5 pt-12">
-            <div className="w-full max-w-[1500px] mx-auto flex flex-col gap-[1px] bg-white/10 rounded-[2rem] overflow-hidden shadow-2xl">
+        <footer className="w-full font-sans">
+            <div className="w-full flex flex-col gap-[1px] bg-white/10 overflow-hidden shadow-2xl">
 
                 {/* ---------- TOP ROW ---------- */}
                 <div className="flex flex-col lg:flex-row w-full gap-[1px]">
 
-                    {/* Top Left: Slogan & Rotating Badge */}
-                    <div className="bg-[#161719] p-8 md:p-14 lg:p-20 flex flex-col justify-between w-full lg:w-[35%] min-h-[350px] lg:min-h-[480px]">
-                        {/* Rotating Badge */}
-                        <div className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center mb-12">
-                            <div className="absolute inset-0 animate-spin-slow duration-[10000ms]">
-                                <svg viewBox="0 0 100 100" overflow="visible" className="w-full h-full">
-                                    <path id="curve-wnxkz4" d="M 0 50 L 0 50 A 1 1 0 0 1 100 50 L 100 50 L 100 50 A 1 1 0 0 1 0 50 L 0 50" strokeWidth="none" fill="transparent"></path>
-                                    <text>
-                                        <textPath href="#curve-wnxkz4" startOffset="0" dominantBaseline="central" style={{ fontSize: '15px', fontWeight: 500, letterSpacing: '0.04em', fill: '#C0C0C0' }}>
-                                            empowering healthcare, delivering excellence -
-                                        </textPath>
-                                    </text>
-                                </svg>
-                            </div>
-                            {/* Blue Center Dot */}
-                            <div className="w-5 h-5 md:w-6 md:h-6 bg-[#00A3FF] rounded-full relative z-10 shadow-[0_0_15px_rgba(0,163,255,0.5)]"></div>
-                        </div>
+                    {/* Top Left: Slogan */}
+                    <div className="bg-[#161719] p-8 md:p-14 lg:p-20 flex flex-col justify-center items-center w-full lg:w-[35%] min-h-[350px] lg:min-h-[480px]">
+
 
                         {/* Slogan */}
-                        <h5 className="text-[24px] md:text-[32px] text-[#A1A1AA] font-medium leading-[1.2] tracking-tight max-w-[300px]">
+                        <h5 className="text-[24px] md:text-[32px] text-[#A1A1AA] font-medium leading-[1.2] tracking-tight w-full text-center max-w-[340px]">
                             The trusted partner for pharmaceutical distribution in Sri Lanka.
                         </h5>
                     </div>
@@ -57,6 +43,7 @@ export default function Footer() {
                     <div className="bg-[#161719] relative w-full lg:w-[65%] min-h-[400px] lg:min-h-[480px] flex flex-col p-8 md:p-12 overflow-hidden group">
                         {/* Video Background */}
                         <video
+                            suppressHydrationWarning
                             src="https://framerusercontent.com/assets/0BlOZC7zBspEbVthghs8ilWWvc.mp4"
                             autoPlay
                             loop
@@ -65,14 +52,14 @@ export default function Footer() {
                             className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen transition-opacity duration-1000 group-hover:opacity-40"
                         />
                         {/* Dark Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#161719] via-transparent to-[#161719]/40 mix-blend-multiply pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#00A3FF]/20 to-[#0A1128]/40 mix-blend-multiply pointer-events-none" />
 
                         {/* Huge Center Logo */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-4 md:px-12">
                             <img
                                 src="/inspira-logo.png"
                                 alt="Inspira Logo"
-                                className="w-full max-w-[800px] object-contain opacity-100"
+                                className="w-full max-w-[500px] md:max-w-[600px] object-contain opacity-100"
                             />
                         </div>
 
@@ -175,16 +162,28 @@ export default function Footer() {
                 </div>
 
                 {/* ---------- FOOTER BAR ---------- */}
-                <div className="bg-[#161719] px-6 py-6 md:px-12 md:py-8 flex flex-col md:flex-row flex-wrap items-start md:items-center justify-between gap-6">
+                <div className="bg-[#161719] px-6 py-6 md:px-12 md:py-8 flex flex-col md:flex-row flex-wrap items-center justify-between gap-6 relative">
 
                     {/* Copyright & Logo */}
-                    <div className="flex flex-col gap-2">
-                        <p className="text-[#888891] text-[13px] md:text-[14px]">© {currentYear} [ Inspira Worldwide ] All rights reserved.</p>
-                        <p className="text-[#888891] text-[13px] md:text-[14px]">Designed by ARC AI</p>
+                    <div className="w-full md:flex-1 flex justify-center md:justify-start order-2 md:order-1 mt-4 md:mt-0">
+                        <p className="text-[#888891] text-[13px] md:text-[14px]">© {currentYear} Inspira Worldwide. All rights reserved.</p>
+                    </div>
+
+                    {/* Designed By */}
+                    <div className="w-full md:flex-1 flex justify-center order-3 md:order-2 mt-2 md:mt-0">
+                        <a
+                            href="https://www.arcai.agency"
+                            target="_blank"
+                            rel="noopener"
+                            title="ARC AI - Web Design & Digital Solutions"
+                            className="flex items-center gap-3 text-[#888891] text-[13px] md:text-[14px] hover:text-white transition-colors"
+                        >
+                            Designed & Developed by <img src="/arc-logo.png" alt="ARC AI - Web Design & Digital Solutions" className="h-10 md:h-12 object-contain translate-y-[2px]" />
+                        </a>
                     </div>
 
                     {/* Socials & Top Button */}
-                    <div className="flex flex-wrap items-center gap-4 md:gap-6 mt-4 md:mt-0 w-full md:w-auto justify-between ml-auto">
+                    <div className="w-full md:flex-1 flex flex-wrap items-center justify-between md:justify-end gap-4 md:gap-6 order-1 md:order-3">
                         {/* Social Links */}
                         <div className="flex items-center gap-4 text-[#888891]">
                             <a href="#" aria-label="LinkedIn" className="hover:text-[#00A3FF] transition-colors"><Linkedin className="w-[18px] h-[18px]" /></a>

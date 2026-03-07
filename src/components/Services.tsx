@@ -58,7 +58,7 @@ export default function Services() {
     };
 
     return (
-        <section className="bg-white py-0 md:py-24 w-full flex justify-center">
+        <section className="bg-[#fafafa] py-0 md:py-24 px-[5px] w-full flex justify-center">
             <div className="w-full bg-[#0A1128] rounded-[2rem] relative overflow-hidden flex flex-col p-6 md:p-16 lg:p-24 pb-24 md:pb-16 gap-0">
 
                 {/* Background Noise Overlay */}
