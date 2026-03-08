@@ -38,8 +38,8 @@ const FlowingMenu: React.FC<FlowingMenuProps> = ({
     borderColor = '#fff'
 }) => {
     return (
-        <div className="w-full h-[100dvh] overflow-hidden" style={{ backgroundColor: bgColor }}>
-            <nav className="flex flex-col h-full m-0 p-0">
+        <div className="w-full h-full pt-20 md:pt-28 overflow-hidden flex flex-col justify-end pb-8" style={{ backgroundColor: bgColor }}>
+            <nav className="flex flex-col h-full max-h-[85vh] m-0 p-0">
                 {items.map((item, idx) => (
                     <MenuItem
                         key={idx}
@@ -164,12 +164,12 @@ const MenuItem: React.FC<MenuItemProps> = ({
 
     return (
         <div
-            className="flex-1 relative overflow-hidden text-center"
+            className="flex-1 relative overflow-hidden text-center flex items-center justify-center"
             ref={itemRef}
             style={{ borderTop: isFirst ? 'none' : `1px solid ${borderColor}` }}
         >
             <a
-                className="flex items-center justify-center h-full w-full relative cursor-pointer uppercase no-underline font-semibold text-[4vh] md:text-[6vh] lg:text-[8vh]"
+                className="flex items-center justify-center w-full relative cursor-pointer uppercase no-underline font-semibold tracking-wide text-[28px] md:text-[36px] lg:text-[52px] py-3 md:py-4 transition-colors"
                 href={link}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -179,24 +179,24 @@ const MenuItem: React.FC<MenuItemProps> = ({
                 {text}
             </a>
             <div
-                className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none translate-y-[101%] will-change-transform"
+                className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none translate-y-[101%] flex items-center justify-center will-change-transform"
                 ref={marqueeRef}
                 style={{ backgroundColor: marqueeBgColor }}
                 aria-hidden="true"
             >
-                <div className="h-full w-full will-change-transform" ref={marqueeInnerRef}>
-                    <div className="h-full w-fit flex will-change-transform" ref={marqueeScrollRef}>
+                <div className="h-full w-full flex items-center will-change-transform" ref={marqueeInnerRef}>
+                    <div className="h-full w-fit flex items-center will-change-transform" ref={marqueeScrollRef}>
                         {[...Array(repetitions)].map((_, idx) => (
-                            <div className="marquee-part flex items-center flex-shrink-0" key={idx} style={{ color: marqueeTextColor }}>
-                                <span className="whitespace-nowrap uppercase font-bold text-[4vh] md:text-[5vh] lg:text-[7vh] leading-[1] px-[4vw] tracking-wider">{text}</span>
+                            <div className="marquee-part flex items-center flex-shrink-0 h-full" key={idx} style={{ color: marqueeTextColor }}>
+                                <span className="whitespace-nowrap uppercase font-bold text-[28px] md:text-[36px] lg:text-[52px] leading-[1] px-[4vw] tracking-wider">{text}</span>
                                 <div
-                                    className="relative w-[160px] md:w-[240px] xl:w-[300px] h-[6vh] md:h-[10vh] my-[2em] mx-[2vw] rounded-[24px] shadow-lg overflow-hidden flex-shrink-0"
+                                    className="relative w-[120px] md:w-[180px] xl:w-[220px] h-[50px] md:h-[60px] my-[10px] mx-[2vw] rounded-[16px] shadow-lg overflow-hidden flex-shrink-0"
                                 >
                                     <Image
                                         src={image}
                                         alt={text}
                                         fill
-                                        sizes="(max-width: 768px) 160px, (max-width: 1280px) 240px, 300px"
+                                        sizes="(max-width: 768px) 120px, (max-width: 1280px) 180px, 220px"
                                         className="object-cover"
                                     />
                                 </div>

@@ -18,13 +18,13 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    { link: '#', text: 'Home', image: '/menu_home_compressed.jpg' },
-    { link: '#', text: 'About', image: '/menu_about_compressed.jpg' },
+    { link: '/', text: 'Home', image: '/menu_home_compressed.jpg' },
+    { link: '/about', text: 'About', image: '/menu_about_compressed.jpg' },
     { link: '#', text: 'Products', image: '/menu_products_compressed.jpg' },
     { link: '#', text: 'Newsroom', image: '/menu_newsroom_compressed.jpg' },
     { link: '#', text: 'Collaboration', image: '/menu_collaboration_compressed.jpg' },
-    { link: '#', text: 'Careers', image: '/menu_careers_compressed.jpg' },
-    { link: '#', text: 'Contact', image: '/menu_contact_compressed.jpg' }
+    { link: '/careers', text: 'Careers', image: '/menu_careers_compressed.jpg' },
+    { link: '/contact', text: 'Contact', image: '/menu_contact_compressed.jpg' }
   ];
 
   useGSAP(() => {
