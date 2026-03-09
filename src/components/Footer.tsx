@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, ArrowRight, ArrowUp, Linkedin, Twitter, Instagram, Youtube, MessageCircle } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ArrowUp, Linkedin, Twitter, Instagram, Youtube, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 const linksCol1 = [
     { label: "Home", href: "#" },
@@ -21,6 +22,44 @@ const linksCol2 = [
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const handleSubscribe = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+
+        setStatus("loading");
+        setErrorMessage("");
+
+        try {
+            const { error } = await supabase
+                .from("email_subscribers")
+                .insert([{ name, email, source: "footer" }]);
+
+            if (error) {
+                if (error.code === '23505') { // Unique violation
+                    setErrorMessage("This email is already subscribed.");
+                } else {
+                    setErrorMessage("Failed to subscribe. Please try again.");
+                }
+                setStatus("error");
+                throw error;
+            }
+
+            setStatus("success");
+            setName("");
+            setEmail("");
+
+            // Revert back to idle after 3 seconds
+            setTimeout(() => setStatus("idle"), 3000);
+        } catch (error) {
+            console.error("Error subscribing:", error);
+        }
+    };
 
     return (
         <footer className="w-full font-sans">
@@ -123,27 +162,38 @@ export default function Footer() {
                             </div>
 
                             {/* Input Form */}
-                            <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
+                            <form className="flex flex-col gap-3" onSubmit={handleSubscribe}>
                                 <input
                                     type="text"
                                     placeholder="Your Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                     className="w-full bg-[#242426] text-white placeholder-[#888891] rounded-xl px-5 py-4 outline-none focus:ring-2 focus:ring-[#00A3FF]/50 border border-white/5 transition-all text-[15px]"
                                     required
+                                    disabled={status === "loading" || status === "success"}
                                 />
-                                <div className="relative flex w-full">
-                                    <input
-                                        type="email"
-                                        placeholder="Your Email"
-                                        className="w-full bg-[#242426] text-white placeholder-[#888891] rounded-xl pl-5 pr-16 py-4 outline-none focus:ring-2 focus:ring-[#00A3FF]/50 border border-white/5 transition-all text-[15px]"
-                                        required
-                                    />
-                                    <button
-                                        type="submit"
-                                        className="absolute right-1.5 top-1.5 bottom-1.5 aspect-square bg-[#00A3FF] hover:bg-[#38bdf8] transition-colors rounded-lg flex items-center justify-center text-[#161719]"
-                                        aria-label="Submit"
-                                    >
-                                        <ArrowRight className="w-5 h-5" />
-                                    </button>
+                                <div className="relative flex w-full flex-col gap-2">
+                                    <div className="relative flex w-full">
+                                        <input
+                                            type="email"
+                                            placeholder="Your Email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className={`w-full bg-[#242426] text-white placeholder-[#888891] rounded-xl pl-5 pr-16 py-4 outline-none focus:ring-2 transition-all text-[15px] ${status === "error" ? "border-red-500/50 focus:ring-red-500/50" : "border-white/5 focus:ring-[#00A3FF]/50"}`}
+                                            required
+                                            disabled={status === "loading" || status === "success"}
+                                        />
+                                        <button
+                                            type="submit"
+                                            disabled={status === "loading" || status === "success"}
+                                            className="absolute right-1.5 top-1.5 bottom-1.5 aspect-square bg-[#00A3FF] hover:bg-[#38bdf8] transition-colors rounded-lg flex items-center justify-center text-[#161719] disabled:opacity-50 disabled:cursor-not-allowed"
+                                            aria-label="Submit"
+                                        >
+                                            {status === "loading" ? <Loader2 className="w-5 h-5 animate-spin" /> : status === "success" ? <CheckCircle2 className="w-5 h-5 text-green-900" /> : <ArrowRight className="w-5 h-5" />}
+                                        </button>
+                                    </div>
+                                    {status === "error" && <p className="text-red-400 text-xs px-1">{errorMessage}</p>}
+                                    {status === "success" && <p className="text-[#00A3FF] text-xs px-1">Successfully subscribed!</p>}
                                 </div>
                             </form>
 

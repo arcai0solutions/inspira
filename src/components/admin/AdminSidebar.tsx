@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Newspaper, Settings, Users, LogOut, MessageSquare, Briefcase, ContactRound } from "lucide-react";
+import { LayoutDashboard, Newspaper, LogOut, MessageSquare, Briefcase, ContactRound, Mail } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 
@@ -18,8 +18,7 @@ export default function AdminSidebar() {
         { name: "Inquiries", href: "/admin/inquiries", icon: MessageSquare },
         { name: "CRM Pipeline", href: "/admin/crm", icon: Briefcase },
         { name: "Contacts", href: "/admin/contacts", icon: ContactRound },
-        { name: "Users", href: "/admin/users", icon: Users },
-        { name: "Settings", href: "/admin/settings", icon: Settings },
+        { name: "Email List", href: "/admin/email-list", icon: Mail },
     ];
 
     const handleSignOut = async () => {

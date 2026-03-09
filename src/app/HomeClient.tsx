@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -15,7 +15,11 @@ gsap.registerPlugin(useGSAP);
 
 export default function HomeClient() {
     const container = useRef<HTMLDivElement>(null);
+    const preloaderRef = useRef<HTMLDivElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showPreloader, setShowPreloader] = useState(true);
+    const hasExited = useRef(false);
 
     const menuItems = [
         { link: '/', text: 'Home', image: '/menu_home_compressed.jpg' },
@@ -27,39 +31,76 @@ export default function HomeClient() {
         { link: '/contact', text: 'Contact', image: '/menu_contact_compressed.jpg' }
     ];
 
-    useGSAP(() => {
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    // Exit preloader with smooth animation
+    const exitPreloader = useCallback(() => {
+        if (hasExited.current || !preloaderRef.current) return;
+        hasExited.current = true;
 
-        // Initial state setup to prevent flash of content
-        gsap.set(".glass-container-hero", { y: 40, opacity: 0, backdropFilter: "blur(0px)" });
-        gsap.set(".hero-element", { y: 20, opacity: 0 });
-        gsap.set(".video-overlay", { backgroundColor: "rgba(0,0,0,1)" });
+        gsap.to(preloaderRef.current, {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.inOut",
+            onComplete: () => setShowPreloader(false),
+        });
+    }, []);
 
-        tl.to(".video-overlay", {
-            backgroundColor: "rgba(0,0,0,0.6)",
-            duration: 1.5,
-            ease: "power2.inOut"
-        })
-            .to(".glass-container-hero", {
-                y: 0,
-                opacity: 1,
-                backdropFilter: "blur(16px)",
-                duration: 1.2,
-            }, "-=0.8")
-            .to(".hero-element", {
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                stagger: 0.15,
-            }, "-=0.6");
+    // Safety timeout: hide preloader after 2s max even if video hasn't loaded
+    useEffect(() => {
+        const timeout = setTimeout(exitPreloader, 2000);
+        return () => clearTimeout(timeout);
+    }, [exitPreloader]);
 
-    }, { scope: container });
+    // When video is ready to play through, exit preloader
+    const handleVideoReady = useCallback(() => {
+        exitPreloader();
+    }, [exitPreloader]);
+
 
     return (
         <main className="min-h-screen bg-white p-[5px]">
+
+            {/* ── Preloader ──────────────────────── */}
+            {showPreloader && (
+                <div
+                    ref={preloaderRef}
+                    className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center"
+                    aria-live="polite"
+                >
+                    <div className="flex flex-col items-center gap-6">
+                        <div className="relative overflow-hidden">
+                            <span className="preloader-typing-text text-white/90 text-3xl md:text-5xl font-light tracking-wide">
+                                Your Pharmaceutical Distribution Partner.
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* CSS typing animation */}
+                    <style>{`
+                        .preloader-typing-text {
+                            display: inline-block;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            border-right: 2px solid rgba(0, 163, 255, 0.8);
+                            width: 0;
+                            animation:
+                                typing 2s steps(42, end) forwards,
+                                blink 0.6s step-end infinite;
+                        }
+                        @keyframes typing {
+                            from { width: 0; }
+                            to { width: 100%; }
+                        }
+                        @keyframes blink {
+                            50% { border-color: transparent; }
+                        }
+                    `}</style>
+                </div>
+            )}
+
             <div ref={container} className="relative w-full h-[calc(100vh-10px)] rounded-[2rem] overflow-hidden flex flex-col justify-end">
-                {/* Background Video */}
+                {/* Background Video — loads while preloader is showing */}
                 <video
+                    ref={videoRef}
                     src="/hero-vid-compressed-v2.mp4"
                     autoPlay
                     loop
@@ -67,11 +108,12 @@ export default function HomeClient() {
                     playsInline
                     suppressHydrationWarning
                     aria-hidden="true"
+                    onCanPlayThrough={handleVideoReady}
                     className="absolute inset-0 w-full h-full object-cover z-0"
                 />
 
-                {/* Black Overlay animated by GSAP */}
-                <div className="video-overlay absolute inset-0 z-10 pointer-events-none" aria-hidden="true" />
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 z-10 pointer-events-none bg-black/40" aria-hidden="true" />
 
                 {/* Flowing Menu Overlay */}
                 <div
@@ -118,16 +160,16 @@ export default function HomeClient() {
                 <div
                     className={`relative z-20 w-full px-6 md:px-12 pb-16 md:pb-28 flex justify-start transition-opacity duration-500 ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
                 >
-                    <div className="glass-container-hero w-fit max-w-[950px] bg-black/40 border border-white/10 p-4 md:py-8 md:pl-8 md:pr-10 rounded-[2rem] shadow-2xl">
+                    <div className="w-fit max-w-[950px] bg-black/40 backdrop-blur-[16px] border border-white/10 p-4 md:py-8 md:pl-8 md:pr-10 rounded-[2rem] shadow-2xl">
 
                         {/* Headline */}
-                        <h1 className="hero-element text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15] mb-5">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15] mb-5">
                             Precision Distribution.<br />
                             <span className="text-zinc-300">Expanding Your Market Reach.</span>
                         </h1>
 
                         {/* Sub-headline */}
-                        <p className="hero-element text-base md:text-lg text-zinc-300 leading-relaxed font-light">
+                        <p className="text-base md:text-lg text-zinc-300 leading-relaxed font-light">
                             We are Sri Lanka's definitive pharmaceutical distribution outsourcing partner.
                             From strategic brand building to risk-minimized logistics, we connect domestic manufacturers
                             to patients with unmatched speed, flexibility, and absolute reliability.
