@@ -5,7 +5,8 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import FlowingMenu from "@/components/FlowingMenu";
-import { MapPin, Phone, Mail, ArrowRight, Linkedin, Twitter, Instagram, Youtube, MessageCircle } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { MapPin, Phone, Mail, ArrowRight, Linkedin, Twitter, Instagram, Youtube, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(useGSAP);
@@ -14,13 +15,16 @@ if (typeof window !== "undefined") {
 export default function ContactClient() {
     const container = useRef<HTMLDivElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [formData, setFormData] = useState({ name: "", email: "", company: "", message: "" });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
     const menuItems = [
         { link: "/", text: "Home", image: "/menu_home_compressed.jpg" },
         { link: "/about", text: "About", image: "/menu_about_compressed.jpg" },
         { link: "#", text: "Products", image: "/menu_products_compressed.jpg" },
-        { link: "#", text: "Newsroom", image: "/menu_newsroom_compressed.jpg" },
-        { link: "#", text: "Collaboration", image: "/menu_collaboration_compressed.jpg" },
+        { link: "/news", text: "Newsroom", image: "/menu_newsroom_compressed.jpg" },
+        { link: "/collaboration", text: "Collaboration", image: "/menu_collaboration_compressed.jpg" },
         { link: "/careers", text: "Careers", image: "/menu_careers_compressed.jpg" },
         { link: "/contact", text: "Contact", image: "/menu_contact_compressed.jpg" },
     ];
@@ -38,6 +42,65 @@ export default function ContactClient() {
             delay: 0.2
         });
     }, { scope: container });
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus("idle");
+
+        try {
+            // 1. First, insert the record into the permanent Contacts table
+            // We do not do .select() here because anonymous Row Level Security (RLS) blocks public SELECTs.
+            const { error: contactError } = await supabase
+                .from('contacts')
+                .insert([{
+                    name: formData.name,
+                    email: formData.email,
+                    company: formData.company
+                }]);
+
+            if (contactError) throw contactError;
+
+            // 2. Add the specific inquiry
+            const { error: inquiryError } = await supabase
+                .from('inquiries')
+                .insert([{
+                    name: formData.name,
+                    email: formData.email,
+                    subject: formData.company ? `Inquiry from ${formData.company}` : `New Inquiry`,
+                    message: formData.message
+                }]);
+
+            if (inquiryError) throw inquiryError;
+
+            setSubmitStatus("success");
+            setFormData({ name: "", email: "", company: "", message: "" });
+
+            // Trigger GSAP success animation on the button
+            gsap.to(".submit-btn", { scale: 1.1, backgroundColor: "#10b981", duration: 0.3, yoyo: true, repeat: 1 });
+
+            setTimeout(() => setSubmitStatus("idle"), 5000);
+
+        } catch (error: any) {
+            const errorMessage = error?.message || error?.error_description || JSON.stringify(error) || "Unknown error";
+            console.error("Error submitting form:", errorMessage);
+
+            // Log the error to the screen to help the user if they forgot to run the migration
+            if (errorMessage.includes('relation "public.contacts" does not exist')) {
+                alert("Database tables are missing! Please run the crm_setup.sql file in your Supabase SQL Editor.");
+            } else {
+                // Show the specific error on the screen so the user can see what failed
+                alert(`Error submitting form: ${errorMessage}`);
+            }
+            setSubmitStatus("error");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div ref={container} className="relative w-full flex flex-col pt-24 lg:pt-32 bg-white text-[#121212]">
@@ -173,28 +236,58 @@ export default function ContactClient() {
                             </div>
 
                             {/* Form Fields */}
-                            <form className="flex flex-col flex-1" onSubmit={(e) => e.preventDefault()}>
+                            <form className="flex flex-col flex-1 relative" onSubmit={handleSubmit}>
+
+                                {submitStatus === "success" && (
+                                    <div className="absolute top-4 left-4 right-4 z-10 bg-green-50 text-green-800 p-4 rounded-xl border border-green-200 flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
+                                        <CheckCircle2 className="text-green-500 w-5 h-5" />
+                                        <span className="font-medium text-sm">Thanks for reaching out! We've received your inquiry and will be in touch soon.</span>
+                                    </div>
+                                )}
+
+                                {submitStatus === "error" && (
+                                    <div className="absolute top-4 left-4 right-4 z-10 bg-red-50 text-red-800 p-4 rounded-xl border border-red-200 flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
+                                        <span className="font-medium text-sm">There was a problem sending your message. Please try again.</span>
+                                    </div>
+                                )}
+
                                 <input
                                     type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleInputChange}
                                     placeholder="Your Name"
                                     className="contact-fade-in w-full bg-transparent border-b border-zinc-200 p-8 md:px-12 xl:px-16 md:py-10 text-[#121212] placeholder-zinc-400 focus:outline-none focus:bg-[#FAFAFA] transition-colors text-[18px] font-light"
                                     required
+                                    disabled={isSubmitting}
                                 />
                                 <input
                                     type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
                                     placeholder="Your Email"
                                     className="contact-fade-in w-full bg-transparent border-b border-zinc-200 p-8 md:px-12 xl:px-16 md:py-10 text-[#121212] placeholder-zinc-400 focus:outline-none focus:bg-[#FAFAFA] transition-colors text-[18px] font-light"
                                     required
+                                    disabled={isSubmitting}
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Your Company"
+                                    name="company"
+                                    value={formData.company}
+                                    onChange={handleInputChange}
+                                    placeholder="Your Company (Optional)"
                                     className="contact-fade-in w-full bg-transparent border-b border-zinc-200 p-8 md:px-12 xl:px-16 md:py-10 text-[#121212] placeholder-zinc-400 focus:outline-none focus:bg-[#FAFAFA] transition-colors text-[18px] font-light"
+                                    disabled={isSubmitting}
                                 />
                                 <textarea
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleInputChange}
                                     placeholder="Your message"
-                                    className="contact-fade-in w-full flex-1 min-h-[300px] bg-transparent border-b border-zinc-200 p-8 md:px-12 xl:px-16 md:py-10 text-[#121212] placeholder-zinc-400 focus:outline-none focus:bg-[#FAFAFA] transition-colors text-[18px] resize-none font-light"
+                                    className="contact-fade-in w-full flex-1 min-h-[120px] md:min-h-[150px] bg-transparent border-b border-zinc-200 p-8 md:px-12 xl:px-16 md:py-10 text-[#121212] placeholder-zinc-400 focus:outline-none focus:bg-[#FAFAFA] transition-colors text-[18px] resize-none font-light"
                                     required
+                                    disabled={isSubmitting}
                                 />
 
                                 {/* Form Footer / Submit */}
@@ -205,15 +298,21 @@ export default function ContactClient() {
                                     </p>
                                     <button
                                         type="submit"
-                                        className="bg-[#00A3FF] hover:bg-[#121212] text-white w-16 h-16 md:w-20 md:h-20 rounded-2xl flex justify-center items-center transition-all duration-300 hover:scale-[1.05] shadow-[0_4px_14px_rgba(0,163,255,0.3)] shrink-0 self-end sm:self-auto group"
+                                        disabled={isSubmitting}
+                                        className={`submit-btn bg-[#00A3FF] hover:bg-[#121212] flex gap-3 text-white h-16 md:h-20 px-8 md:px-10 rounded-2xl flex justify-center items-center transition-all duration-300 hover:scale-[1.02] shadow-[0_4px_14px_rgba(0,163,255,0.3)] shrink-0 self-end sm:self-auto group ${isSubmitting ? 'opacity-70 cursor-not-allowed scale-100 hover:rotate-0' : ''}`}
                                     >
-                                        <ArrowRight className="w-7 h-7 md:w-8 md:h-8 group-hover:-rotate-45 transition-transform duration-300" />
+                                        <span className="text-[18px] font-medium tracking-wide">
+                                            {isSubmitting ? "Sending..." : "Send"}
+                                        </span>
+                                        {isSubmitting ? (
+                                            <Loader2 className="w-6 h-6 animate-spin" />
+                                        ) : (
+                                            <ArrowRight className="w-7 h-7 md:w-8 md:h-8 group-hover:-rotate-45 transition-transform duration-300" />
+                                        )}
                                     </button>
                                 </div>
                             </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>
