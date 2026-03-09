@@ -101,7 +101,7 @@ export default function HomeClient() {
                 {/* Background Video — loads while preloader is showing */}
                 <video
                     ref={videoRef}
-                    src="/hero-vid-compressed-v2.mp4"
+                    src="/hero-vid-compressed.mp4"
                     autoPlay
                     loop
                     muted
