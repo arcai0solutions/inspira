@@ -1,8 +1,53 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Check, Calendar } from "lucide-react";
+
+// Lazy-loading video: only loads + plays when visible in viewport
+function LazyVideo({ src }: { src: string }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        const container = containerRef.current;
+        if (!video || !container) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    // Start loading + playing
+                    if (!video.src) {
+                        video.src = src;
+                    }
+                    video.play().catch(() => { });
+                } else {
+                    // Pause when scrolled out of view
+                    video.pause();
+                }
+            },
+            { threshold: 0.25 }
+        );
+
+        observer.observe(container);
+        return () => observer.disconnect();
+    }, [src]);
+
+    return (
+        <div ref={containerRef} className="w-full h-full">
+            <video
+                ref={videoRef}
+                loop
+                muted
+                playsInline
+                preload="none"
+                suppressHydrationWarning
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
+            />
+        </div>
+    );
+}
 
 const processSteps = [
     {
@@ -64,17 +109,9 @@ export default function Process() {
                                 }}
                             >
                                 {/* Left Video Column */}
-                                <div className="w-full lg:w-[45%] h-[300px] sm:h-[400px] lg:h-[480px] rounded-[16px] overflow-hidden relative shrink-0 shadow-sm border border-black/5">
+                                <div className="relative w-full lg:w-[45%] h-[300px] sm:h-[400px] lg:h-[480px] rounded-[16px] overflow-hidden relative shrink-0 shadow-sm border border-black/5">
                                     <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10 transition-opacity duration-500 opacity-0 group-hover/card:opacity-100 pointer-events-none" />
-                                    <video
-                                        src={step.video}
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
-                                        suppressHydrationWarning
-                                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
-                                    />
+                                    <LazyVideo src={step.video} />
                                 </div>
 
                                 {/* Right Content Column */}
