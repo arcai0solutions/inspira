@@ -16,11 +16,8 @@ export function AiChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        // Auto-open on desktop devices after a short delay
-        if (typeof window !== "undefined" && window.innerWidth >= 1024) {
-            const timer = setTimeout(() => setIsOpen(true), 1500);
-            return () => clearTimeout(timer);
-        }
+        // Prevent hydration errors by waiting for mount if needed for other things,
+        // but no auto-open anymore.
     }, []);
 
     const [inputValue, setInputValue] = useState("");
