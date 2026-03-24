@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
-import { Plus, Trash2, Loader2, GripVertical, MoreVertical, DollarSign } from "lucide-react";
+import { Plus, Trash2, Loader2, GripVertical, MoreVertical, DollarSign, Eye, X } from "lucide-react";
 
 interface Stage {
     id: string;
@@ -20,6 +20,12 @@ interface Lead {
     value: number | null;
     notes: string | null;
     created_at: string;
+    contacts?: {
+        name: string;
+        email: string | null;
+        phone: string | null;
+        company: string | null;
+    } | null;
 }
 
 type BoardData = {
@@ -41,6 +47,9 @@ export default function CRMClient() {
     // New Lead Form
     const [addingLeadToStage, setAddingLeadToStage] = useState<string | null>(null);
     const [newLeadTitle, setNewLeadTitle] = useState("");
+
+    // Viewing Lead Modal
+    const [viewingLead, setViewingLead] = useState<Lead | null>(null);
 
     // Auto-scroll during drag
     const scrollContainerRef = useRef<HTMLDivElement | null>(null);
@@ -110,10 +119,10 @@ export default function CRMClient() {
 
             if (stagesError) throw stagesError;
 
-            // Fetch leads
+            // Fetch leads with their linked contact details
             const { data: leadsData, error: leadsError } = await supabase
                 .from('crm_leads')
-                .select('*')
+                .select('*, contacts(*)')
                 .order('position', { ascending: true });
 
             if (leadsError) throw leadsError;
@@ -427,12 +436,22 @@ export default function CRMClient() {
                                                                         <GripVertical className="w-4 h-4 text-zinc-300 mt-1 cursor-grab" />
                                                                         <h4 className="font-medium text-zinc-900 leading-tight">{lead.title}</h4>
                                                                     </div>
-                                                                    <button
-                                                                        onClick={() => handleDeleteLead(stageId, lead.id)}
-                                                                        className="opacity-0 group-hover:opacity-100 text-zinc-400 hover:text-red-500 transition-all"
-                                                                    >
-                                                                        <Trash2 size={14} />
-                                                                    </button>
+                                                                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all">
+                                                                        <button
+                                                                            onClick={() => setViewingLead(lead)}
+                                                                            className="text-zinc-400 hover:text-[#00A3FF] transition-colors p-1"
+                                                                            title="View Details"
+                                                                        >
+                                                                            <Eye size={16} />
+                                                                        </button>
+                                                                        <button
+                                                                            onClick={() => handleDeleteLead(stageId, lead.id)}
+                                                                            className="text-zinc-400 hover:text-red-500 transition-colors p-1"
+                                                                            title="Delete Lead"
+                                                                        >
+                                                                            <Trash2 size={14} />
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
 
                                                                 {lead.notes && (
@@ -489,6 +508,79 @@ export default function CRMClient() {
                     </div>
                 </div>
             </div>
+
+            {/* View Lead Modal */}
+            {viewingLead && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden border border-zinc-200">
+                        {/* Header */}
+                        <div className="flex items-start justify-between p-6 border-b border-zinc-100">
+                            <div>
+                                <h2 className="text-xl font-semibold text-zinc-900 mb-1">{viewingLead.title}</h2>
+                                <div className="text-xs text-zinc-500">
+                                    Added on {new Date(viewingLead.created_at).toLocaleDateString()}
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => setViewingLead(null)}
+                                className="text-zinc-400 hover:text-zinc-700 transition-colors bg-zinc-100 hover:bg-zinc-200 rounded-full p-1.5"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+                        
+                        {/* Body */}
+                        <div className="p-6 space-y-6">
+                            {/* Contact Details */}
+                            {viewingLead.contacts && (
+                                <div className="space-y-3">
+                                    <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 border-b border-zinc-100 pb-2">Contact Information</h3>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <div className="text-xs text-zinc-500 mb-1">Name</div>
+                                            <div className="text-sm font-medium text-zinc-900">{viewingLead.contacts.name}</div>
+                                        </div>
+                                        {viewingLead.contacts.company && (
+                                            <div>
+                                                <div className="text-xs text-zinc-500 mb-1">Company</div>
+                                                <div className="text-sm font-medium text-zinc-900">{viewingLead.contacts.company}</div>
+                                            </div>
+                                        )}
+                                        {viewingLead.contacts.email && (
+                                            <div className="col-span-2">
+                                                <div className="text-xs text-zinc-500 mb-1">Email</div>
+                                                <a href={`mailto:${viewingLead.contacts.email}`} className="text-sm font-medium text-[#00A3FF] hover:underline break-all">
+                                                    {viewingLead.contacts.email}
+                                                </a>
+                                            </div>
+                                        )}
+                                        {viewingLead.contacts.phone && (
+                                            <div className="col-span-2">
+                                                <div className="text-xs text-zinc-500 mb-1">Phone</div>
+                                                <a href={`tel:${viewingLead.contacts.phone}`} className="text-sm font-medium text-zinc-900 hover:text-[#00A3FF] transition-colors">
+                                                    {viewingLead.contacts.phone}
+                                                </a>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Value & Notes */}
+                            <div className="space-y-3">
+                                <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 border-b border-zinc-100 pb-2">Lead Notes</h3>
+                                {viewingLead.notes ? (
+                                    <div className="bg-zinc-50 border border-zinc-100 rounded-xl p-4 text-sm text-zinc-700 whitespace-pre-wrap leading-relaxed">
+                                        {viewingLead.notes}
+                                    </div>
+                                ) : (
+                                    <div className="text-sm text-zinc-400 italic">No notes provided.</div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </DragDropContext>
     );
 }

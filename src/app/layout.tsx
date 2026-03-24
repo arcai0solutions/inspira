@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import EmailPopup from "@/components/EmailPopup";
+import { AiChatWidget } from "@/components/AiChatWidget";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -63,6 +64,7 @@ export default function RootLayout({
       >
         {children}
         <EmailPopup />
+        <AiChatWidget />
       </body>
     </html>
   );
