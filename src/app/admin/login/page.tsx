@@ -5,6 +5,7 @@ import AdminLoginClient from "./AdminLoginClient";
 export const metadata = {
     title: "Admin Login | Inspira Worldwide",
     description: "Secure login for Inspira Worldwide administrators.",
+    robots: { index: false, follow: false },
 };
 
 export default function AdminLoginPage() {

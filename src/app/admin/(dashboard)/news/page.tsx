@@ -4,6 +4,7 @@ import AdminNewsClient from "./AdminNewsClient";
 export const metadata = {
     title: "Newsroom Management - Dashboard | Inspira Worldwide",
     description: "Manage Inspira Worldwide news articles and PR announcements.",
+    robots: { index: false, follow: false },
 };
 
 export default function AdminNewsPage() {

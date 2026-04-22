@@ -4,6 +4,7 @@ import ContactsClient from "./ContactsClient";
 export const metadata = {
     title: "Contacts Registry | Inspira Worldwide",
     description: "Master list of all contacts, leads, and inquiries.",
+    robots: { index: false, follow: false },
 };
 
 export default function ContactsPage() {

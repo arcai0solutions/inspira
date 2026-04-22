@@ -4,6 +4,7 @@ import CRMClient from "./CRMClient";
 export const metadata = {
     title: "CRM Pipeline | Inspira Worldwide",
     description: "Manage leads and opportunities through the Inspira sales pipeline.",
+    robots: { index: false, follow: false },
 };
 
 export default function CRMPage() {

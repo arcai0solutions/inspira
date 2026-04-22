@@ -4,6 +4,7 @@ import InquiriesClient from "./InquiriesClient";
 export const metadata = {
     title: "Website Inquiries | Inspira Worldwide",
     description: "Manage incoming contact forms and inquiries from the website.",
+    robots: { index: false, follow: false },
 };
 
 export default function InquiriesPage() {
