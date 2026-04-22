@@ -102,31 +102,31 @@ export default function Process() {
                         return (
                             <div
                                 key={step.id}
-                                className="sticky w-full bg-white border border-[#EBEBEB] rounded-[32px] p-6 md:p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col lg:flex-row gap-8 lg:gap-14 mb-[6vh] lg:mb-[8vh] transition-all duration-500 ease-out hover:shadow-[0_8px_30px_rgb(0,163,255,0.06)] hover:border-[#0088CC]/20 group/card"
+                                className="sticky w-full bg-white border border-[#EBEBEB] rounded-[32px] p-5 md:p-7 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col lg:flex-row gap-6 lg:gap-10 mb-[6vh] lg:mb-[8vh] transition-all duration-500 ease-out hover:shadow-[0_8px_30px_rgb(0,163,255,0.06)] hover:border-[#0088CC]/20 group/card"
                                 style={{
                                     top: `calc(120px + ${index * 40}px)`,
                                     zIndex: index + 10,
                                 }}
                             >
                                 {/* Left Video Column */}
-                                <div className="relative w-full lg:w-[45%] h-[300px] sm:h-[400px] lg:h-[480px] rounded-[16px] overflow-hidden relative shrink-0 shadow-sm border border-black/5">
+                                <div className="relative w-full lg:w-[45%] h-[260px] sm:h-[320px] lg:h-[380px] rounded-[16px] overflow-hidden relative shrink-0 shadow-sm border border-black/5">
                                     <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10 transition-opacity duration-500 opacity-0 group-hover/card:opacity-100 pointer-events-none" />
                                     <LazyVideo src={step.video} />
                                 </div>
 
                                 {/* Right Content Column */}
-                                <div className="w-full lg:w-[55%] flex flex-col justify-start py-4 lg:py-6 h-full min-h-[300px] lg:min-h-[480px]">
+                                <div className="w-full lg:w-[55%] flex flex-col justify-start py-3 lg:py-5 h-full min-h-[260px] lg:min-h-[380px]">
                                     <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 mb-6 md:mb-8">
                                         <div className="flex items-center justify-center w-14 h-14 rounded-[14px] bg-gradient-to-br from-blue-50 to-blue-100/50 border border-blue-200/50 shadow-sm shrink-0">
                                             <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#00A3FF] to-[#005495] font-bold text-xl">
                                                 {step.id}
                                             </span>
                                         </div>
-                                        <h3 className="text-[28px] md:text-[36px] lg:text-[40px] font-semibold text-[#121212] leading-[1.15] tracking-tight group-hover/card:text-[#005495] transition-colors duration-300">
+                                        <h3 className="text-[24px] md:text-[30px] lg:text-[34px] font-semibold text-[#121212] leading-[1.15] tracking-tight group-hover/card:text-[#005495] transition-colors duration-300">
                                             {step.title}
                                         </h3>
                                     </div>
-                                    <p className="text-[17px] md:text-[19px] text-[#616161] leading-[1.6] mb-10 max-w-xl">
+                                    <p className="text-[15px] md:text-[17px] text-[#616161] leading-[1.6] mb-8 max-w-xl">
                                         {step.description}
                                     </p>
 
