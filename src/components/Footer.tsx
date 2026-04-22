@@ -6,16 +6,16 @@ import { ArrowUpRight, ArrowRight, ArrowUp, Linkedin, Twitter, Instagram, Youtub
 import { supabase } from "@/lib/supabase";
 
 const linksCol1 = [
-    { label: "Home", href: "#" },
-    { label: "About", href: "#" },
-    { label: "Products", href: "#" },
-    { label: "Newsroom", href: "#" }
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Products", href: "/products" },
+    { label: "Newsroom", href: "/news" }
 ];
 
 const linksCol2 = [
-    { label: "Collaboration", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Collaboration", href: "/collaboration" },
+    { label: "Careers", href: "/careers" },
+    { label: "Contact", href: "/contact" },
     { label: "Terms & Service", href: "#", muted: true },
     { label: "Privacy Policy", href: "#", muted: true }
 ];

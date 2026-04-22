@@ -24,7 +24,7 @@ export default function HomeClient() {
     const menuItems = [
         { link: '/', text: 'Home', image: '/menu_home_compressed.jpg' },
         { link: '/about', text: 'About', image: '/menu_about_compressed.jpg' },
-        { link: '#', text: 'Products', image: '/menu_products_compressed.jpg' },
+        { link: '/products', text: 'Products', image: '/menu_products_compressed.jpg' },
         { link: '/news', text: 'Newsroom', image: '/menu_newsroom_compressed.jpg' },
         { link: '/collaboration', text: 'Collaboration', image: '/menu_collaboration_compressed.jpg' },
         { link: '/careers', text: 'Careers', image: '/menu_careers_compressed.jpg' },
