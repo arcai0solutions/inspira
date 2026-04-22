@@ -39,21 +39,12 @@ export const metadata: Metadata = {
     title: "Inspira Worldwide | Pharmaceutical Distribution in Sri Lanka",
     description:
       "Sri Lanka's definitive pharmaceutical distribution outsourcing partner.",
-    images: [
-      {
-        url: "/og-image-warehouse.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Inspira Worldwide — Pharmaceutical Distribution in Sri Lanka",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Inspira Worldwide",
     description:
       "Sri Lanka's definitive pharmaceutical distribution outsourcing partner.",
-    images: ["/og-image-warehouse.jpg"],
   },
   robots: {
     index: true,
