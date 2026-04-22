@@ -1,81 +1,36 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { Check, Calendar } from "lucide-react";
-
-// Lazy-loading video: only loads + plays when visible in viewport
-function LazyVideo({ src }: { src: string }) {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const video = videoRef.current;
-        const container = containerRef.current;
-        if (!video || !container) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    // Start loading + playing
-                    if (!video.src) {
-                        video.src = src;
-                    }
-                    video.play().catch(() => { });
-                } else {
-                    // Pause when scrolled out of view
-                    video.pause();
-                }
-            },
-            { threshold: 0.25 }
-        );
-
-        observer.observe(container);
-        return () => observer.disconnect();
-    }, [src]);
-
-    return (
-        <div ref={containerRef} className="w-full h-full">
-            <video
-                ref={videoRef}
-                loop
-                muted
-                playsInline
-                preload="none"
-                suppressHydrationWarning
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
-            />
-        </div>
-    );
-}
 
 const processSteps = [
     {
         id: "01",
         title: "Understand Your Product and Goals",
         description: "We begin by understanding your product portfolio, market objectives, and distribution priorities so we can build the right strategy around your needs.",
-        video: "/step_1_compressed.mp4",
+        image: "/process_step_1_clean.webp",
         tags: ["Portfolio Analysis", "Market Objectives", "Distribution Priorities", "Strategy Docs"]
     },
     {
         id: "02",
         title: "Design the Right Distribution Model",
         description: "Our team develops a practical plan covering warehousing, movement, market access, and promotional support to ensure smooth execution.",
-        video: "/step_2_compressed.mp4",
+        image: "/process_step_2_clean.webp",
         tags: ["Warehousing Setup", "Logistics Plan", "Market Access", "Promotional Support"]
     },
     {
         id: "03",
         title: "Execute with Speed and Precision",
         description: "We activate our distribution channels, logistics coordination, and field support systems to move your products efficiently and reliably across Sri Lanka.",
-        video: "/step_3_compressed.mp4",
+        image: "/process_step_3_clean.webp",
         tags: ["Channel Activation", "Logistics Coord", "Field Support", "Fast Delivery"]
     },
     {
         id: "04",
         title: "Monitor, Improve, and Grow",
         description: "We continuously review performance, refine delivery flows, and support long-term brand growth to help you strengthen your market position.",
-        video: "/step_4_compressed.mp4",
+        image: "/process_step_4_clean.webp",
         tags: ["Performance Review", "Refining Flows", "Brand Growth", "Market Position"]
     }
 ];
@@ -111,7 +66,13 @@ export default function Process() {
                                 {/* Left Video Column */}
                                 <div className="relative w-full lg:w-[45%] h-[260px] sm:h-[320px] lg:h-[380px] rounded-[16px] overflow-hidden relative shrink-0 shadow-sm border border-black/5">
                                     <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10 transition-opacity duration-500 opacity-0 group-hover/card:opacity-100 pointer-events-none" />
-                                    <LazyVideo src={step.video} />
+                                    <Image
+                                        src={step.image}
+                                        alt={step.title}
+                                        fill
+                                        sizes="(max-width: 1024px) 100vw, 45vw"
+                                        className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
+                                    />
                                 </div>
 
                                 {/* Right Content Column */}
