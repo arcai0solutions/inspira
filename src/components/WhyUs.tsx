@@ -148,17 +148,17 @@ export default function WhyUs() {
                         <div className="bg-white rounded-[24px] p-5 border border-zinc-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex-1 flex flex-col justify-center">
                             <Zap className="w-5 h-5 text-[#121212] mb-2" />
                             <h4 className="font-bold text-[#121212] text-[15px] tracking-tight mb-1.5">Speed & Flexibility</h4>
-                            <p className="text-[#777777] font-medium text-[14px] leading-[1.4]">Our agile operations and energetic management adapt instantly to market needs, ensuring your supply chain moves without bottlenecks.</p>
+                            <p className="text-[#636363] font-medium text-[14px] leading-[1.4]">Our agile operations and energetic management adapt instantly to market needs, ensuring your supply chain moves without bottlenecks.</p>
                         </div>
                         <div className="bg-white rounded-[24px] p-5 border border-zinc-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex-1 flex flex-col justify-center">
                             <Shield className="w-5 h-5 text-[#121212] mb-2" />
                             <h4 className="font-bold text-[#121212] text-[15px] tracking-tight mb-1.5">Seamless Outsourcing</h4>
-                            <p className="text-[#777777] font-medium text-[14px] leading-[1.4]">We take over the complexities of warehousing, sorting, and logistics so you can focus solely on engineering life-saving therapeutics.</p>
+                            <p className="text-[#636363] font-medium text-[14px] leading-[1.4]">We take over the complexities of warehousing, sorting, and logistics so you can focus solely on engineering life-saving therapeutics.</p>
                         </div>
                         <div className="bg-white rounded-[24px] p-5 border border-zinc-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex-1 flex flex-col justify-center">
                             <TrendingUp className="w-5 h-5 text-[#121212] mb-2" />
                             <h4 className="font-bold text-[#121212] text-[15px] tracking-tight mb-1.5">Dedicated Field Teams</h4>
-                            <p className="text-[#777777] font-medium text-[14px] leading-[1.4]">Our talented marketing teams provide practical support and execute time-tested promotional strategies to grow your market share locally.</p>
+                            <p className="text-[#636363] font-medium text-[14px] leading-[1.4]">Our talented marketing teams provide practical support and execute time-tested promotional strategies to grow your market share locally.</p>
                         </div>
                     </div>
 
@@ -175,7 +175,7 @@ export default function WhyUs() {
                         </div>
                         <div className="relative z-10 mt-auto pb-4">
                             <h3 className="text-white text-[28px] font-bold tracking-tight mb-1.5">A Healthy Life.</h3>
-                            <p className="text-[#A8A8A8] font-medium text-[15px]">Delivering excellence across Sri Lanka.</p>
+                            <p className="text-[#C0C0C0] font-medium text-[15px]">Delivering excellence across Sri Lanka.</p>
                         </div>
                     </div>
 

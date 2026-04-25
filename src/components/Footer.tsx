@@ -123,7 +123,7 @@ export default function Footer() {
 
                             {/* Col 1 */}
                             <div className="flex flex-col gap-5">
-                                <h4 className="text-[11px] font-bold text-[#888891] uppercase tracking-[0.2em] mb-1">
+                                <h4 className="text-[11px] font-bold text-[#9E9EA6] uppercase tracking-[0.2em] mb-1">
                                     Navigation
                                 </h4>
                                 {linksCol1.map((link, i) => (
@@ -136,14 +136,14 @@ export default function Footer() {
 
                             {/* Col 2 */}
                             <div className="flex flex-col gap-5">
-                                <h4 className="text-[11px] font-bold text-[#888891] uppercase tracking-[0.2em] mb-1">
+                                <h4 className="text-[11px] font-bold text-[#9E9EA6] uppercase tracking-[0.2em] mb-1">
                                     Company
                                 </h4>
                                 {linksCol2.map((link, i) => (
                                     <Link
                                         key={i}
                                         href={link.href}
-                                        className={`group flex items-center font-medium text-[15px] w-fit transition-all duration-300 ${link.muted ? 'text-[#888891] hover:text-white' : 'text-white hover:text-[#00A3FF]'}`}
+                                        className={`group flex items-center font-medium text-[15px] w-fit transition-all duration-300 ${link.muted ? 'text-[#9E9EA6] hover:text-white' : 'text-white hover:text-[#00A3FF]'}`}
                                     >
                                         <span className="relative transform transition-transform duration-300 group-hover:translate-x-1">{link.label}</span>
                                         <ArrowRight className="w-4 h-4 ml-1 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-2" />
@@ -160,7 +160,7 @@ export default function Footer() {
                             {/* Title & Desc */}
                             <div className="flex flex-col gap-2">
                                 <h5 className="text-[#E3DBD8] text-[22px] md:text-[26px] font-semibold tracking-tight">Keep up with our journey and updates</h5>
-                                <p className="text-[#888891] text-[14px]">Get the latest news, insights directly to your inbox. <span className="text-[#00A3FF]">*</span></p>
+                                <p className="text-[#9E9EA6] text-[14px]">Get the latest news, insights directly to your inbox. <span className="text-[#00A3FF]">*</span></p>
                             </div>
 
                             {/* Input Form */}
@@ -201,10 +201,10 @@ export default function Footer() {
 
                             {/* Disclaimers */}
                             <div className="flex flex-col gap-4 mt-2">
-                                <p className="text-[#888891] text-[13px] md:text-[14px]">
-                                    By submitting, you agree to our <a href="#terms" className="text-[#00A3FF] hover:underline underline-offset-2">Terms & Service.</a>
+                                <p className="text-[#9E9EA6] text-[13px] md:text-[14px]">
+                                    By submitting, you agree to our <a href="#terms" className="text-[#00A3FF] underline underline-offset-2 hover:text-[#38bdf8]">Terms & Service.</a>
                                 </p>
-                                <p className="text-[#888891] text-[13px] md:text-[14px]">
+                                <p className="text-[#9E9EA6] text-[13px] md:text-[14px]">
                                     <span className="text-[#00A3FF] font-bold">*</span> No spam, just awesome updates.
                                 </p>
                             </div>
@@ -218,7 +218,7 @@ export default function Footer() {
 
                     {/* Copyright & Logo */}
                     <div className="w-full md:flex-1 flex justify-center md:justify-start order-2 md:order-1 mt-4 md:mt-0">
-                        <p className="text-[#888891] text-[13px] md:text-[14px]">© {currentYear} Inspira Worldwide. All rights reserved.</p>
+                        <p className="text-[#9E9EA6] text-[13px] md:text-[14px]">© {currentYear} Inspira Worldwide. All rights reserved.</p>
                     </div>
 
                     {/* Designed By */}
@@ -227,7 +227,7 @@ export default function Footer() {
                             href="https://www.arcai.agency"
                             target="_blank"
                             title="ARC AI - AI Automation & Software Solutions Agency"
-                            className="flex items-center gap-3 text-[#888891] text-[13px] md:text-[14px] hover:text-white transition-colors"
+                            className="flex items-center gap-3 text-[#9E9EA6] text-[13px] md:text-[14px] hover:text-white transition-colors"
                         >
                             Designed & Developed by <img src="/arc-logo.png" alt="ARC AI - AI Automation & Software Solutions Agency" className="h-10 md:h-12 object-contain translate-y-[2px]" />
                         </a>
@@ -236,7 +236,7 @@ export default function Footer() {
                     {/* Socials & Top Button */}
                     <div className="w-full md:flex-1 flex flex-wrap items-center justify-between md:justify-end gap-4 md:gap-6 order-1 md:order-3">
                         {/* Social Links */}
-                        <div className="flex items-center gap-4 text-[#888891]">
+                        <div className="flex items-center gap-4 text-[#9E9EA6]">
                             <a href="#" aria-label="LinkedIn" className="hover:text-[#00A3FF] transition-colors"><Linkedin className="w-[18px] h-[18px]" /></a>
                             <a href="#" aria-label="Twitter/X" className="hover:text-[#00A3FF] transition-colors"><Twitter className="w-[18px] h-[18px]" /></a>
                             <a href="#" aria-label="Instagram" className="hover:text-[#00A3FF] transition-colors"><Instagram className="w-[18px] h-[18px]" /></a>
@@ -247,6 +247,7 @@ export default function Footer() {
                         {/* Back to Top */}
                         <button
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            aria-label="Back to top"
                             className="bg-[#212225] hover:bg-[#2a2b2e] transition-colors rounded-lg flex items-center gap-2 px-4 py-2 text-[#E3DBD8] text-[12px] font-semibold tracking-wider"
                         >
                             TOP

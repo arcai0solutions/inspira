@@ -72,6 +72,9 @@ export default function EmailPopup() {
             <div
                 className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
                 onClick={() => setIsOpen(false)}
+                role="button"
+                aria-label="Close popup"
+                tabIndex={-1}
             />
 
             {/* Modal Content */}
@@ -101,7 +104,7 @@ export default function EmailPopup() {
                     <h3 className="text-[24px] font-semibold text-white tracking-tight leading-tight mb-3">
                         Want to stay up to date?
                     </h3>
-                    <p className="text-zinc-400 text-[15px] leading-relaxed mb-8">
+                    <p className="text-zinc-300 text-[15px] leading-relaxed mb-8">
                         Get the latest news, updates, and pharmaceutical insights directly to your inbox.
                     </p>
 
@@ -138,7 +141,7 @@ export default function EmailPopup() {
                         {status === "success" && <p className="text-[#00A3FF] text-xs text-left px-1 mt-1">Successfully subscribed!</p>}
                     </form>
 
-                    <p className="text-xs text-zinc-500 mt-6 font-medium">
+                    <p className="text-xs text-zinc-400 mt-6 font-medium">
                         No spam. Unsubscribe at any time.
                     </p>
                 </div>

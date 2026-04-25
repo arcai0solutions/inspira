@@ -128,14 +128,13 @@ export default function Process() {
                     </div>
 
                     <div className="relative z-10 shrink-0 w-full lg:w-auto">
-                        <a href="#contact" className="w-full flex">
-                            <button
-                                className="w-full lg:w-auto relative flex items-center justify-center gap-3 px-8 py-5 rounded-full bg-[#121212] hover:bg-[#222222] text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
-                                style={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 15px 30px -10px" }}
-                            >
-                                <Calendar className="w-5 h-5 drop-shadow-md" />
-                                <span className="font-semibold tracking-wide text-[16px] drop-shadow-md">Book a meeting</span>
-                            </button>
+                        <a
+                            href="#contact"
+                            className="w-full lg:w-auto relative flex items-center justify-center gap-3 px-8 py-5 rounded-full bg-[#121212] hover:bg-[#222222] text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+                            style={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 15px 30px -10px" }}
+                        >
+                            <Calendar className="w-5 h-5 drop-shadow-md" />
+                            <span className="font-semibold tracking-wide text-[16px] drop-shadow-md">Book a meeting</span>
                         </a>
                     </div>
                 </div>

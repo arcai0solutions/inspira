@@ -97,6 +97,8 @@ export default function FAQ() {
                                 >
                                     <button
                                         onClick={() => toggleAccordion(index)}
+                                        aria-expanded={isOpen}
+                                        aria-label={`${isOpen ? 'Collapse' : 'Expand'} ${faq.question}`}
                                         className="w-full min-h-[84px] p-6 lg:px-8 flex justify-between items-center text-left focus:outline-none cursor-pointer group"
                                     >
                                         <h3 className="text-[16px] md:text-[18px] font-medium text-[#121212] pr-6 group-hover:text-[#00A3FF] transition-colors">

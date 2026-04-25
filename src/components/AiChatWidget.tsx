@@ -139,6 +139,7 @@ export function AiChatWidget() {
                             </div>
                             <button
                                 onClick={() => setIsOpen(false)}
+                                aria-label="Close chat"
                                 className="text-white/60 hover:text-white transition-colors"
                             >
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -172,7 +173,7 @@ export function AiChatWidget() {
                                             remarkPlugins={[remarkGfm]}
                                             components={{
                                                 a: ({ node, ...props }) => (
-                                                    <a {...props} target="_blank" rel="noopener noreferrer" className={`font-medium hover:underline break-all ${msg.role === "user" ? "text-[#FFD700]" : "text-[#00A3FF]"}`} />
+                                                    <a {...props} target="_blank" rel="noopener noreferrer" className={`font-medium underline underline-offset-2 break-all ${msg.role === "user" ? "text-[#FFD700]" : "text-[#00A3FF]"}`} />
                                                 ),
                                                 p: ({ node, ...props }) => <p className="mb-2 last:mb-0" {...props} />,
                                                 ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-2 last:mb-0" {...props} />,
@@ -224,6 +225,7 @@ export function AiChatWidget() {
                                 <button
                                     type="submit"
                                     disabled={!inputValue.trim() || isLoading}
+                                    aria-label="Send message"
                                     className="absolute right-1.5 w-7 h-7 flex items-center justify-center rounded-full bg-gradient-to-br from-[#00A3FF] to-[#0088DD] text-white disabled:opacity-50 disabled:cursor-not-allowed transition-opacity shadow-[0_2px_6px_rgba(0,163,255,0.35),inset_0_1px_1px_rgba(255,255,255,0.2)]"
                                 >
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -264,6 +266,8 @@ export function AiChatWidget() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsOpen(!isOpen)}
+                    aria-label={isOpen ? "Close chat assistant" : "Open chat assistant"}
+                    aria-expanded={isOpen}
                     className={`relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center
                        transition-all duration-300 z-10 overflow-hidden
                        ${isOpen

@@ -84,6 +84,8 @@ export default function Services() {
                                 {/* Accordion Header (Clickable) */}
                                 <button
                                     onClick={() => toggleAccordion(index)}
+                                    aria-expanded={isOpen}
+                                    aria-label={`${isOpen ? 'Collapse' : 'Expand'} ${service.title}`}
                                     className="w-full py-6 md:py-8 flex justify-between items-center group text-left focus:outline-none cursor-pointer"
                                 >
                                     <h3 className={`text-[18px] sm:text-[22px] md:text-[28px] lg:text-[36px] font-semibold tracking-tight transition-colors duration-300 ${isOpen ? 'text-white' : 'text-white group-hover:text-white/80'}`}>

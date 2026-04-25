@@ -24,6 +24,8 @@ export default function HomeClient() {
     const hasExited = useRef(false);
     const typingDone = useRef(false);
     const videoReady = useRef(false);
+    const [typedText, setTypedText] = useState("");
+    const fullText = "Your Pharmaceutical Distribution Partner.";
 
     const menuItems = [
         { link: '/', text: 'Home', image: '/menu_home_compressed.jpg' },
@@ -56,13 +58,23 @@ export default function HomeClient() {
         }
     }, [exitPreloader]);
 
-    // Typing animation lasts 2s — wait 2.5s (animation + brief pause) then mark done
+    // Character-by-character typing effect
     useEffect(() => {
-        const typingTimeout = setTimeout(() => {
-            typingDone.current = true;
-            tryExit();
-        }, 2200); // 2s typing + 0.2s pause
-        return () => clearTimeout(typingTimeout);
+        let charIndex = 0;
+        const speed = 50; // ms per character
+        const interval = setInterval(() => {
+            charIndex++;
+            setTypedText(fullText.slice(0, charIndex));
+            if (charIndex >= fullText.length) {
+                clearInterval(interval);
+                // Brief pause after typing completes, then mark done
+                setTimeout(() => {
+                    typingDone.current = true;
+                    tryExit();
+                }, 400);
+            }
+        }, speed);
+        return () => clearInterval(interval);
     }, [tryExit]);
 
     // Safety timeout: if video STILL hasn't loaded after 4s, force-mark it ready
@@ -88,35 +100,28 @@ export default function HomeClient() {
             {showPreloader && (
                 <div
                     ref={preloaderRef}
-                    className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center"
+                    className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center px-6"
                     aria-live="polite"
                 >
-                    <div className="flex flex-col items-center gap-6">
-                        <div className="relative overflow-hidden">
-                            <span className="preloader-typing-text text-white/90 text-3xl md:text-5xl font-light tracking-wide">
-                                Your Pharmaceutical Distribution Partner.
-                            </span>
-                        </div>
+                    <div className="flex flex-col items-center gap-6 w-full max-w-[90vw] md:max-w-[700px]">
+                        <p className="text-white/90 text-xl sm:text-2xl md:text-5xl font-light tracking-wide text-center leading-relaxed">
+                            {typedText}
+                            <span className="preloader-cursor" />
+                        </p>
                     </div>
 
-                    {/* CSS typing animation */}
                     <style>{`
-                        .preloader-typing-text {
+                        .preloader-cursor {
                             display: inline-block;
-                            overflow: hidden;
-                            white-space: nowrap;
-                            border-right: 2px solid rgba(0, 163, 255, 0.8);
-                            width: 0;
-                            animation:
-                                typing 2s steps(42, end) forwards,
-                                blink 0.6s step-end infinite;
+                            width: 2px;
+                            height: 1em;
+                            background: rgba(0, 163, 255, 0.8);
+                            margin-left: 2px;
+                            vertical-align: text-bottom;
+                            animation: cursorBlink 0.6s step-end infinite;
                         }
-                        @keyframes typing {
-                            from { width: 0; }
-                            to { width: 100%; }
-                        }
-                        @keyframes blink {
-                            50% { border-color: transparent; }
+                        @keyframes cursorBlink {
+                            50% { opacity: 0; }
                         }
                     `}</style>
                 </div>
