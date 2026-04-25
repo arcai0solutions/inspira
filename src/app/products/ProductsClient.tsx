@@ -2,9 +2,11 @@
 
 import React, { useRef, useState, useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import FlowingMenu from "@/components/FlowingMenu";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import Footer from "@/components/Footer";
 
 if (typeof window !== "undefined") {
@@ -126,6 +128,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 export default function ProductsClient() {
     const container = useRef<HTMLDivElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    useScrollLock(isMenuOpen);
     const [activeCategory, setActiveCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -134,6 +137,7 @@ export default function ProductsClient() {
         { link: "/about", text: "About", image: "/menu_about_compressed.jpg" },
         { link: "/products", text: "Products", image: "/menu_products_compressed.jpg" },
         { link: "/news", text: "Newsroom", image: "/menu_newsroom_compressed.jpg" },
+        { link: "/articles", text: "Articles", image: "/menu_newsroom_compressed.jpg" },
         { link: "/collaboration", text: "Collaboration", image: "/menu_collaboration_compressed.jpg" },
         { link: "/careers", text: "Careers", image: "/menu_careers_compressed.jpg" },
         { link: "/contact", text: "Contact", image: "/menu_contact_compressed.jpg" },
@@ -202,7 +206,7 @@ export default function ProductsClient() {
 
             {/* Top Navigation / Logo Area */}
             <div className="absolute top-0 left-0 w-full z-[60] px-6 md:px-16 pt-4 md:pt-6 flex justify-between items-start pointer-events-none">
-                <a href="/" className="pointer-events-auto">
+                <Link href="/" className="pointer-events-auto">
                     <Image
                         src="/inspira-logo.png"
                         alt="Inspira Worldwide Logo"
@@ -212,7 +216,7 @@ export default function ProductsClient() {
                         className={`object-contain w-auto h-16 md:h-20 transition-all duration-300 ${isMenuOpen ? "invert-0" : "invert"
                             }`}
                     />
-                </a>
+                </Link>
 
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -347,7 +351,7 @@ export default function ProductsClient() {
                             <p className="text-white/60 text-lg max-w-xl font-light leading-relaxed">
                                 We offer integrated marketing, promotion, and island-wide distribution solutions for domestic pharmaceutical manufacturers in Sri Lanka.
                             </p>
-                            <a
+                            <Link
                                 href="/collaboration"
                                 className="mt-4 inline-flex items-center gap-2 bg-[#00A3FF] hover:bg-[#38bdf8] text-[#121212] font-bold px-8 py-4 rounded-full transition-all duration-300 shadow-lg shadow-[#00A3FF]/20 hover:shadow-[#00A3FF]/40 text-[15px] uppercase tracking-wider"
                             >
@@ -355,7 +359,7 @@ export default function ProductsClient() {
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
-                            </a>
+                            </Link>
                         </div>
                     </div>
 

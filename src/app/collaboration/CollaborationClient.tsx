@@ -2,10 +2,12 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import FlowingMenu from "@/components/FlowingMenu";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import Footer from "@/components/Footer";
 import { ShieldCheck, TrendingUp, Globe, ArrowRight } from "lucide-react";
 
@@ -16,12 +18,14 @@ if (typeof window !== "undefined") {
 export default function CollaborationClient() {
     const container = useRef<HTMLDivElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    useScrollLock(isMenuOpen);
 
     const menuItems = [
         { link: "/", text: "Home", image: "/menu_home_compressed.jpg" },
         { link: "/about", text: "About", image: "/menu_about_compressed.jpg" },
         { link: "/products", text: "Products", image: "/menu_products_compressed.jpg" },
         { link: "/news", text: "Newsroom", image: "/menu_newsroom_compressed.jpg" },
+        { link: "/articles", text: "Articles", image: "/menu_newsroom_compressed.jpg" },
         { link: "/collaboration", text: "Collaboration", image: "/menu_collaboration_compressed.jpg" },
         { link: "/careers", text: "Careers", image: "/menu_careers_compressed.jpg" },
         { link: "/contact", text: "Contact", image: "/menu_contact_compressed.jpg" },
@@ -158,7 +162,7 @@ export default function CollaborationClient() {
 
             {/* Top Navigation - Adjusted for Dark Background */}
             <div className="absolute top-0 left-0 w-full z-[60] px-6 md:px-16 pt-4 md:pt-6 flex justify-between items-start pointer-events-none">
-                <a href="/" className="pointer-events-auto">
+                <Link href="/" className="pointer-events-auto">
                     <Image
                         src="/inspira-logo.png"
                         alt="Inspira Worldwide Logo"
@@ -167,7 +171,7 @@ export default function CollaborationClient() {
                         priority
                         className={`object-contain w-auto h-16 md:h-20 transition-opacity duration-300 ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
                     />
-                </a>
+                </Link>
 
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -375,12 +379,12 @@ export default function CollaborationClient() {
                         </p>
 
                         <div className="reveal-section p-[1px] rounded-full bg-gradient-to-r from-[#00A3FF]/40 via-[#38bdf8] to-[#00A3FF]/40 overflow-hidden shadow-[0_0_60px_rgba(0,163,255,0.2)]">
-                            <a href="/contact" className="relative group bg-[#060010] hover:bg-[#0a001a] flex items-center justify-center px-10 py-5 rounded-full overflow-hidden transition-all duration-300">
+                            <Link href="/contact" className="relative group bg-[#060010] hover:bg-[#0a001a] flex items-center justify-center px-10 py-5 rounded-full overflow-hidden transition-all duration-300">
                                 <span className="relative z-10 text-[18px] md:text-[20px] font-medium text-white mr-4 group-hover:text-[#38bdf8] transition-colors">Initiate Dialogue</span>
                                 <div className="relative z-10 w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#121212] group-hover:bg-[#38bdf8] group-hover:text-white shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-colors duration-300">
                                     <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

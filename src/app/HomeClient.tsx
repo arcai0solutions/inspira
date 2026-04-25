@@ -5,6 +5,7 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import FlowingMenu from '@/components/FlowingMenu';
+import { useScrollLock } from '@/hooks/useScrollLock';
 import WhyUs from '@/components/WhyUs';
 import Services from '@/components/Services';
 import Process from "@/components/Process";
@@ -18,14 +19,18 @@ export default function HomeClient() {
     const preloaderRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    useScrollLock(isMenuOpen);
     const [showPreloader, setShowPreloader] = useState(true);
     const hasExited = useRef(false);
+    const typingDone = useRef(false);
+    const videoReady = useRef(false);
 
     const menuItems = [
         { link: '/', text: 'Home', image: '/menu_home_compressed.jpg' },
         { link: '/about', text: 'About', image: '/menu_about_compressed.jpg' },
         { link: '/products', text: 'Products', image: '/menu_products_compressed.jpg' },
         { link: '/news', text: 'Newsroom', image: '/menu_newsroom_compressed.jpg' },
+        { link: '/articles', text: 'Articles', image: '/menu_newsroom_compressed.jpg' },
         { link: '/collaboration', text: 'Collaboration', image: '/menu_collaboration_compressed.jpg' },
         { link: '/careers', text: 'Careers', image: '/menu_careers_compressed.jpg' },
         { link: '/contact', text: 'Contact', image: '/menu_contact_compressed.jpg' }
@@ -44,16 +49,36 @@ export default function HomeClient() {
         });
     }, []);
 
-    // Safety timeout: hide preloader after 2s max even if video hasn't loaded
-    useEffect(() => {
-        const timeout = setTimeout(exitPreloader, 2000);
-        return () => clearTimeout(timeout);
+    // Only exit when BOTH typing is done AND video is ready (or safety timeout)
+    const tryExit = useCallback(() => {
+        if (typingDone.current && videoReady.current) {
+            exitPreloader();
+        }
     }, [exitPreloader]);
 
-    // When video is ready to play through, exit preloader
+    // Typing animation lasts 2s — wait 2.5s (animation + brief pause) then mark done
+    useEffect(() => {
+        const typingTimeout = setTimeout(() => {
+            typingDone.current = true;
+            tryExit();
+        }, 2200); // 2s typing + 0.2s pause
+        return () => clearTimeout(typingTimeout);
+    }, [tryExit]);
+
+    // Safety timeout: if video STILL hasn't loaded after 4s, force-mark it ready
+    useEffect(() => {
+        const safetyTimeout = setTimeout(() => {
+            videoReady.current = true;
+            tryExit();
+        }, 4000);
+        return () => clearTimeout(safetyTimeout);
+    }, [tryExit]);
+
+    // When video is ready to play through, mark it and try to exit
     const handleVideoReady = useCallback(() => {
-        exitPreloader();
-    }, [exitPreloader]);
+        videoReady.current = true;
+        tryExit();
+    }, [tryExit]);
 
 
     return (
@@ -102,6 +127,7 @@ export default function HomeClient() {
                 <video
                     ref={videoRef}
                     src="/hero-vid-compressed.mp4"
+                    preload="auto"
                     autoPlay
                     loop
                     muted

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, ArrowRight, ArrowUp, Linkedin, Twitter, Instagram, Youtube, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
@@ -9,15 +10,16 @@ const linksCol1 = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Products", href: "/products" },
-    { label: "Newsroom", href: "/news" }
+    { label: "Newsroom", href: "/news" },
+    { label: "Articles", href: "/articles" }
 ];
 
 const linksCol2 = [
     { label: "Collaboration", href: "/collaboration" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
-    { label: "Terms & Service", href: "#", muted: true },
-    { label: "Privacy Policy", href: "#", muted: true }
+    { label: "Terms & Service", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy" }
 ];
 
 export default function Footer() {
@@ -121,31 +123,31 @@ export default function Footer() {
 
                             {/* Col 1 */}
                             <div className="flex flex-col gap-5">
-                                <div className="flex items-center gap-1.5 mb-2">
-                                    <div className="w-[18px] h-[6px] rounded-[2px] bg-[#00A3FF]"></div>
-                                    <div className="w-[6px] h-[6px] rounded-[2px] bg-white/20"></div>
-                                </div>
+                                <h4 className="text-[11px] font-bold text-[#888891] uppercase tracking-[0.2em] mb-1">
+                                    Navigation
+                                </h4>
                                 {linksCol1.map((link, i) => (
-                                    <a key={i} href={link.href} className="text-white hover:text-[#00A3FF] transition-colors font-medium text-[15px] w-fit">
-                                        {link.label}
-                                    </a>
+                                    <Link key={i} href={link.href} className="group flex items-center text-white hover:text-[#00A3FF] transition-all duration-300 font-medium text-[15px] w-fit">
+                                        <span className="relative transform transition-transform duration-300 group-hover:translate-x-1">{link.label}</span>
+                                        <ArrowRight className="w-4 h-4 ml-1 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-2" />
+                                    </Link>
                                 ))}
                             </div>
 
                             {/* Col 2 */}
                             <div className="flex flex-col gap-5">
-                                <div className="flex items-center gap-1.5 mb-2">
-                                    <div className="w-[6px] h-[6px] rounded-[2px] bg-[#00A3FF]"></div>
-                                    <div className="w-[18px] h-[6px] rounded-[2px] bg-white/20"></div>
-                                </div>
+                                <h4 className="text-[11px] font-bold text-[#888891] uppercase tracking-[0.2em] mb-1">
+                                    Company
+                                </h4>
                                 {linksCol2.map((link, i) => (
-                                    <a
+                                    <Link
                                         key={i}
                                         href={link.href}
-                                        className={`font-medium text-[15px] w-fit transition-colors ${link.muted ? 'text-[#888891] hover:text-white' : 'text-white hover:text-[#00A3FF]'}`}
+                                        className={`group flex items-center font-medium text-[15px] w-fit transition-all duration-300 ${link.muted ? 'text-[#888891] hover:text-white' : 'text-white hover:text-[#00A3FF]'}`}
                                     >
-                                        {link.label}
-                                    </a>
+                                        <span className="relative transform transition-transform duration-300 group-hover:translate-x-1">{link.label}</span>
+                                        <ArrowRight className="w-4 h-4 ml-1 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-2" />
+                                    </Link>
                                 ))}
                             </div>
 
@@ -224,11 +226,10 @@ export default function Footer() {
                         <a
                             href="https://www.arcai.agency"
                             target="_blank"
-                            rel="noopener"
-                            title="ARC AI - Web Design & Digital Solutions"
+                            title="ARC AI - AI Automation & Software Solutions Agency"
                             className="flex items-center gap-3 text-[#888891] text-[13px] md:text-[14px] hover:text-white transition-colors"
                         >
-                            Designed & Developed by <img src="/arc-logo.png" alt="ARC AI - Web Design & Digital Solutions" className="h-10 md:h-12 object-contain translate-y-[2px]" />
+                            Designed & Developed by <img src="/arc-logo.png" alt="ARC AI - AI Automation & Software Solutions Agency" className="h-10 md:h-12 object-contain translate-y-[2px]" />
                         </a>
                     </div>
 

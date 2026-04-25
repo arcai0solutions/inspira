@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { gsap } from 'gsap';
 
 interface MenuItemData {
@@ -168,7 +169,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
             ref={itemRef}
             style={{ borderTop: isFirst ? 'none' : `1px solid ${borderColor}` }}
         >
-            <a
+            <Link
                 className="flex items-center justify-center w-full relative cursor-pointer uppercase no-underline font-semibold tracking-wide text-[28px] md:text-[36px] lg:text-[52px] py-3 md:py-4 transition-colors"
                 href={link}
                 onMouseEnter={handleMouseEnter}
@@ -177,7 +178,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
                 aria-label={`Navigate to ${text}`}
             >
                 {text}
-            </a>
+            </Link>
             <div
                 className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none translate-y-[101%] flex items-center justify-center will-change-transform"
                 ref={marqueeRef}

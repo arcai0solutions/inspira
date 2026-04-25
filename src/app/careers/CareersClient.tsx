@@ -2,10 +2,12 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import FlowingMenu from "@/components/FlowingMenu";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import Footer from "@/components/Footer";
 import { HeartPulse, TrendingUp, Zap, ArrowUpRight, ArrowRight } from "lucide-react";
 
@@ -16,12 +18,14 @@ if (typeof window !== "undefined") {
 export default function CareersClient() {
     const container = useRef<HTMLDivElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    useScrollLock(isMenuOpen);
 
     const menuItems = [
         { link: "/", text: "Home", image: "/menu_home_compressed.jpg" },
         { link: "/about", text: "About", image: "/menu_about_compressed.jpg" },
         { link: "/products", text: "Products", image: "/menu_products_compressed.jpg" },
         { link: "/news", text: "Newsroom", image: "/menu_newsroom_compressed.jpg" },
+        { link: "/articles", text: "Articles", image: "/menu_newsroom_compressed.jpg" },
         { link: "/collaboration", text: "Collaboration", image: "/menu_collaboration_compressed.jpg" },
         { link: "/careers", text: "Careers", image: "/menu_careers_compressed.jpg" },
         { link: "/contact", text: "Contact", image: "/menu_contact_compressed.jpg" },
@@ -114,7 +118,7 @@ export default function CareersClient() {
 
             {/* Top Navigation */}
             <div className="absolute top-0 left-0 w-full z-[60] px-6 md:px-16 pt-4 md:pt-6 flex justify-between items-start pointer-events-none mix-blend-difference text-white">
-                <a href="/" className="pointer-events-auto">
+                <Link href="/" className="pointer-events-auto">
                     <Image
                         src="/inspira-logo.png"
                         alt="Inspira Worldwide Logo"
@@ -123,7 +127,7 @@ export default function CareersClient() {
                         priority
                         className={`object-contain w-auto h-16 md:h-20 transition-all duration-300 ${isMenuOpen ? "brightness-0 invert" : "filter invert-0"} will-change-transform`}
                     />
-                </a>
+                </Link>
 
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}

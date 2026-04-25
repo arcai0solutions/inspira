@@ -37,7 +37,7 @@ const processSteps = [
 
 export default function Process() {
     return (
-        <section id="process" className="bg-[#fafafa] pt-15  pb-40 w-full flex flex-col items-center font-sans tracking-tight relative">
+        <section id="process" className="bg-[#fafafa] pt-15 pb-20 lg:pb-40 w-full flex flex-col items-center font-sans tracking-tight relative">
 
             {/* ---------- HEADER ---------- */}
             <div className="w-full max-w-[1400px] px-6 md:px-12 flex flex-col items-start gap-4 mb-16 md:mb-24">
@@ -52,12 +52,12 @@ export default function Process() {
             <div className="w-full max-w-[1240px] px-5 md:px-10 flex flex-col items-center">
 
                 {/* ---------- STACKING CARDS ---------- */}
-                <div className="w-full flex flex-col relative pb-10">
+                <div className="w-full flex flex-col relative pb-0 lg:pb-10">
                     {processSteps.map((step, index) => {
                         return (
                             <div
                                 key={step.id}
-                                className="sticky w-full bg-white border border-[#EBEBEB] rounded-[32px] p-5 md:p-7 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col lg:flex-row gap-6 lg:gap-10 mb-[6vh] lg:mb-[8vh] transition-all duration-500 ease-out hover:shadow-[0_8px_30px_rgb(0,163,255,0.06)] hover:border-[#0088CC]/20 group/card"
+                                className="lg:sticky w-full bg-white border border-[#EBEBEB] rounded-[32px] p-5 md:p-7 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col lg:flex-row gap-6 lg:gap-10 mb-8 lg:mb-[8vh] transition-all duration-500 ease-out hover:shadow-[0_8px_30px_rgb(0,163,255,0.06)] hover:border-[#0088CC]/20 group/card"
                                 style={{
                                     top: `calc(120px + ${index * 40}px)`,
                                     zIndex: index + 10,

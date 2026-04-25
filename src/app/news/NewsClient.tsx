@@ -2,9 +2,11 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import FlowingMenu from "@/components/FlowingMenu";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import { supabase } from "@/lib/supabase";
 
 if (typeof window !== "undefined") {
@@ -22,6 +24,7 @@ interface NewsItem {
 export default function NewsClient() {
     const container = useRef<HTMLDivElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    useScrollLock(isMenuOpen);
     const [news, setNews] = useState<NewsItem[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -30,6 +33,7 @@ export default function NewsClient() {
         { link: "/about", text: "About", image: "/menu_about_compressed.jpg" },
         { link: "/products", text: "Products", image: "/menu_products_compressed.jpg" },
         { link: "/news", text: "Newsroom", image: "/menu_newsroom_compressed.jpg" },
+        { link: "/articles", text: "Articles", image: "/menu_newsroom_compressed.jpg" },
         { link: "/collaboration", text: "Collaboration", image: "/menu_collaboration_compressed.jpg" },
         { link: "/careers", text: "Careers", image: "/menu_careers_compressed.jpg" },
         { link: "/contact", text: "Contact", image: "/menu_contact_compressed.jpg" },
@@ -89,7 +93,7 @@ export default function NewsClient() {
 
             {/* Top Navigation / Logo Area */}
             <div className="absolute top-0 left-0 w-full z-[60] px-6 md:px-16 pt-4 md:pt-6 flex justify-between items-start pointer-events-none">
-                <a href="/" className="pointer-events-auto">
+                <Link href="/" className="pointer-events-auto">
                     <Image
                         src="/inspira-logo.png"
                         alt="Inspira Worldwide Logo"
@@ -98,7 +102,7 @@ export default function NewsClient() {
                         priority
                         className={`object-contain w-auto h-16 md:h-20 transition-all duration-300 ${isMenuOpen ? "invert-0" : "invert"}`}
                     />
-                </a>
+                </Link>
 
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}

@@ -115,12 +115,12 @@ export function AiChatWidget() {
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
                         className="absolute bottom-20 right-0 w-[320px] sm:w-[360px] h-[480px] max-h-[75vh] flex flex-col overflow-hidden rounded-[20px]
-                       bg-gradient-to-b from-white/[0.12] to-white/[0.04] backdrop-blur-[40px]
-                       border border-white/[0.18]
-                       shadow-[0_8px_32px_rgba(0,0,0,0.4),0_24px_48px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.2)]"
+                       bg-gradient-to-b from-[#0a1628] to-[#06101f]
+                       border border-[#1a3a5c]
+                       shadow-[0_8px_32px_rgba(0,0,0,0.5),0_24px_48px_rgba(0,0,0,0.35)]"
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.08] bg-white/[0.03]">
+                        <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#1a3a5c] bg-[#0d1d33]">
                             <div className="flex items-center gap-3">
                                 <div className="relative w-9 h-9 rounded-full bg-gradient-to-br from-[#00A3FF] to-cyan-400 flex items-center justify-center border border-white/20 shadow-[0_2px_8px_rgba(0,163,255,0.3)]">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
@@ -193,7 +193,7 @@ export function AiChatWidget() {
                                     animate={{ opacity: 1 }}
                                     className="flex justify-start"
                                 >
-                                    <div className="bg-white/[0.06] border border-white/[0.08] backdrop-blur-md rounded-2xl px-4 py-3 flex gap-2 items-center">
+                                    <div className="bg-[#0d1d33] border border-[#1a3a5c] rounded-2xl px-4 py-3 flex gap-2 items-center">
                                         <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className="w-2 h-2 rounded-full bg-white/60" />
                                         <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }} className="w-2 h-2 rounded-full bg-white/60" />
                                         <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }} className="w-2 h-2 rounded-full bg-white/60" />
@@ -211,14 +211,14 @@ export function AiChatWidget() {
                         </div>
 
                         {/* Input Area */}
-                        <div className="p-3 border-t border-white/[0.08] bg-black/20">
+                        <div className="p-3 border-t border-[#1a3a5c] bg-[#081525]">
                             <form onSubmit={handleSubmit} className="relative flex items-center">
                                 <input
                                     type="text"
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     placeholder="Ask me anything..."
-                                    className="w-full bg-white/[0.05] border border-white/[0.1] rounded-full px-4 py-2.5 pr-11 text-white text-[13px] focus:outline-none focus:border-white/25 focus:bg-white/[0.08] transition-all placeholder:text-white/35"
+                                    className="w-full bg-[#0d1d33] border border-[#1a3a5c] rounded-full px-4 py-2.5 pr-11 text-white text-[13px] focus:outline-none focus:border-[#00A3FF]/50 focus:bg-[#112240] transition-all placeholder:text-white/40"
                                     disabled={isLoading}
                                 />
                                 <button
@@ -234,10 +234,11 @@ export function AiChatWidget() {
                             </form>
 
                             {/* ARC AI Branding */}
-                            <div className="mt-2 text-center">
-                                <span className="text-white/40 text-[10px] uppercase font-medium tracking-wider">
-                                    Powered by <a href="https://www.arcai.agency" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors underline decoration-white/20 hover:decoration-white/60">ARC AI</a>
-                                </span>
+                            <div className="mt-2 flex items-center justify-center gap-1.5 -ml-1">
+                                <span className="text-white/40 text-[10px] uppercase font-medium tracking-wider">Powered by</span>
+                                <a href="https://www.arcai.agency" target="_blank" rel="noopener noreferrer">
+                                    <img src="/arc-logo.png" alt="ARC AI" className="h-5 w-auto" />
+                                </a>
                             </div>
                         </div>
                     </motion.div>

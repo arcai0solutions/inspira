@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://inspira-final.netlify.app"),
+  metadataBase: new URL("https://inspiraworldwide.com"),
   title: {
     default: "Inspira Worldwide | Pharmaceutical Distribution in Sri Lanka",
     template: "%s | Inspira Worldwide",
