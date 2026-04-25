@@ -14,12 +14,12 @@ const linksCol1 = [
     { label: "Articles", href: "/articles" }
 ];
 
-const linksCol2 = [
+const linksCol2: { label: string; href: string; muted?: boolean }[] = [
     { label: "Collaboration", href: "/collaboration" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
-    { label: "Terms & Service", href: "/terms" },
-    { label: "Privacy Policy", href: "/privacy" }
+    { label: "Terms & Service", href: "/terms", muted: true },
+    { label: "Privacy Policy", href: "/privacy", muted: true }
 ];
 
 export default function Footer() {
