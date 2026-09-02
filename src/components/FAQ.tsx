@@ -183,7 +183,7 @@ export default function FAQ() {
                                     Let's have a chat
                                 </span>
                                 <a
-                                    href="#contact"
+                                    href="/contact"
                                     aria-label="Contact us"
                                     className="w-[44px] h-[44px] flex-shrink-0 rounded-xl bg-[#00A3FF] hover:bg-[#38bdf8] flex items-center justify-center transition-colors shadow-sm group"
                                 >

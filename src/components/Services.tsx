@@ -125,7 +125,7 @@ export default function Services() {
 
                     {/* Bottom See Pricing Button */}
                     <div className="mt-12 md:mt-24 w-full flex justify-start">
-                        <a href="#partner" className="bg-[#EBEBEB] hover:bg-white text-[#121212] flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full text-[15px] md:text-[16px] font-medium transition-colors w-fit group">
+                        <a href="/collaboration" className="bg-[#EBEBEB] hover:bg-white text-[#121212] flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full text-[15px] md:text-[16px] font-medium transition-colors w-fit group">
                             Partner With Us
                             <span className="transform group-hover:rotate-45 transition-transform duration-300">
                                 <ArrowDiagonalIcon className="w-4 h-4" />

@@ -160,7 +160,7 @@ export default function Footer() {
                             {/* Title & Desc */}
                             <div className="flex flex-col gap-2">
                                 <h5 className="text-[#E3DBD8] text-[22px] md:text-[26px] font-semibold tracking-tight">Keep up with our journey and updates</h5>
-                                <p className="text-[#9E9EA6] text-[14px]">Get the latest news, insights directly to your inbox. <span className="text-[#00A3FF]">*</span></p>
+                                <p className="text-[#9E9EA6] text-[14px]">Company news, partnership updates and distribution announcements. <span className="text-[#00A3FF]">*</span></p>
                             </div>
 
                             {/* Input Form */}
@@ -202,7 +202,7 @@ export default function Footer() {
                             {/* Disclaimers */}
                             <div className="flex flex-col gap-4 mt-2">
                                 <p className="text-[#9E9EA6] text-[13px] md:text-[14px]">
-                                    By submitting, you agree to our <a href="#terms" className="text-[#00A3FF] underline underline-offset-2 hover:text-[#38bdf8]">Terms & Service.</a>
+                                    By submitting, you agree to our <a href="/terms" className="text-[#00A3FF] underline underline-offset-2 hover:text-[#38bdf8]">Terms & Service.</a>
                                 </p>
                                 <p className="text-[#9E9EA6] text-[13px] md:text-[14px]">
                                     <span className="text-[#00A3FF] font-bold">*</span> No spam, just awesome updates.

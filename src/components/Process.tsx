@@ -2,7 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-import { Check, Calendar } from "lucide-react";
+import Link from "next/link";
+import { Check, Calendar, Phone } from "lucide-react";
+import { PHONE_HREF, PHONE_NUMBER } from "@/lib/banners";
 
 const processSteps = [
     {
@@ -45,7 +47,7 @@ export default function Process() {
                     Our Process
                 </h2>
                 <p className="text-[17px] md:text-[20px] text-[#616161] max-w-2xl leading-[1.6] mt-2 font-medium">
-                    Seamless operations from start to finish. We design and execute practical plans covering warehousing, movement, market access, and promotional support.
+                    Smart, reliable service from first brief to final delivery. We design and execute practical plans covering warehousing, movement, market access, and promotional support.
                 </p>
             </div>
 
@@ -127,14 +129,22 @@ export default function Process() {
                         </p>
                     </div>
 
-                    <div className="relative z-10 shrink-0 w-full lg:w-auto">
-                        <a
-                            href="#contact"
+                    <div className="relative z-10 shrink-0 w-full lg:w-auto flex flex-col sm:flex-row gap-3">
+                        <Link
+                            href="/contact"
                             className="w-full lg:w-auto relative flex items-center justify-center gap-3 px-8 py-5 rounded-full bg-[#121212] hover:bg-[#222222] text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
                             style={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 15px 30px -10px" }}
                         >
                             <Calendar className="w-5 h-5 drop-shadow-md" />
-                            <span className="font-semibold tracking-wide text-[16px] drop-shadow-md">Book a meeting</span>
+                            <span className="font-semibold tracking-wide text-[16px] drop-shadow-md">Book a Meeting</span>
+                        </Link>
+                        <a
+                            href={PHONE_HREF}
+                            aria-label={"Call Inspira Worldwide on " + PHONE_NUMBER}
+                            className="w-full lg:w-auto relative flex items-center justify-center gap-3 px-8 py-5 rounded-full bg-white hover:bg-zinc-50 text-[#121212] border border-zinc-200 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+                        >
+                            <Phone className="w-5 h-5" />
+                            <span className="font-semibold tracking-wide text-[16px]">Call</span>
                         </a>
                     </div>
                 </div>

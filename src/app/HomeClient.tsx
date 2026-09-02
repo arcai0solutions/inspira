@@ -6,7 +6,9 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import FlowingMenu from '@/components/FlowingMenu';
 import { useScrollLock } from '@/hooks/useScrollLock';
+import HeroBanner from '@/components/HeroBanner';
 import WhyUs from '@/components/WhyUs';
+import Infrastructure from '@/components/Infrastructure';
 import Services from '@/components/Services';
 import Process from "@/components/Process";
 import FAQ from "@/components/FAQ";
@@ -17,13 +19,12 @@ gsap.registerPlugin(useGSAP);
 export default function HomeClient() {
     const container = useRef<HTMLDivElement>(null);
     const preloaderRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     useScrollLock(isMenuOpen);
     const [showPreloader, setShowPreloader] = useState(true);
     const hasExited = useRef(false);
     const typingDone = useRef(false);
-    const videoReady = useRef(false);
+    const bannerReady = useRef(false);
     const [typedText, setTypedText] = useState("");
     const fullText = "Your Pharmaceutical Distribution Partner.";
 
@@ -51,9 +52,9 @@ export default function HomeClient() {
         });
     }, []);
 
-    // Only exit when BOTH typing is done AND video is ready (or safety timeout)
+    // Only exit when BOTH typing is done AND the first banner has painted (or safety timeout)
     const tryExit = useCallback(() => {
-        if (typingDone.current && videoReady.current) {
+        if (typingDone.current && bannerReady.current) {
             exitPreloader();
         }
     }, [exitPreloader]);
@@ -77,18 +78,18 @@ export default function HomeClient() {
         return () => clearInterval(interval);
     }, [tryExit]);
 
-    // Safety timeout: if video STILL hasn't loaded after 4s, force-mark it ready
+    // Safety timeout: if the banner STILL hasn't loaded after 4s, force-mark it ready
     useEffect(() => {
         const safetyTimeout = setTimeout(() => {
-            videoReady.current = true;
+            bannerReady.current = true;
             tryExit();
         }, 4000);
         return () => clearTimeout(safetyTimeout);
     }, [tryExit]);
 
-    // When video is ready to play through, mark it and try to exit
-    const handleVideoReady = useCallback(() => {
-        videoReady.current = true;
+    // When the first banner image has painted, mark it and try to exit
+    const handleBannerReady = useCallback(() => {
+        bannerReady.current = true;
         tryExit();
     }, [tryExit]);
 
@@ -127,24 +128,18 @@ export default function HomeClient() {
                 </div>
             )}
 
-            <div ref={container} className="relative w-full h-[calc(100vh-10px)] rounded-[2rem] overflow-hidden flex flex-col justify-end">
-                {/* Background Video — loads while preloader is showing */}
-                <video
-                    ref={videoRef}
-                    src="/hero-vid-compressed.mp4"
-                    preload="auto"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    suppressHydrationWarning
-                    aria-hidden="true"
-                    onCanPlayThrough={handleVideoReady}
-                    className="absolute inset-0 w-full h-full object-cover z-0"
-                />
+            {/* Fixed 16:9 box, always fully on screen.
+                The artwork is 16:9 too, so it fits exactly at every breakpoint — no
+                zoomed-in crop on mobile. Capping the WIDTH against the viewport height
+                (max-w = availableHeight x 16/9) keeps the box inside the fold on wide or
+                short screens instead of running past it, without ever cropping the image. */}
+            <div
+                ref={container}
+                className="relative w-full aspect-video max-h-[calc(100vh_-_10px)] max-w-[calc((100vh_-_10px)*16/9)] mx-auto rounded-[1rem] md:rounded-[2rem] overflow-hidden"
+            >
 
-                {/* Dark Overlay */}
-                <div className="absolute inset-0 z-10 pointer-events-none bg-black/40" aria-hidden="true" />
+                {/* Rotating hero banners — managed from /admin/banners */}
+                <HeroBanner hidden={isMenuOpen} onReady={handleBannerReady} />
 
                 {/* Flowing Menu Overlay */}
                 <div
@@ -165,14 +160,14 @@ export default function HomeClient() {
                 </div>
 
                 {/* Top Navigation / Logo Area */}
-                <div className="absolute top-0 left-0 w-full z-40 px-6 md:px-16 pt-6 md:pt-10 flex justify-between items-start pointer-events-none">
+                <div className="absolute top-0 left-0 w-full z-40 px-4 md:px-16 pt-4 md:pt-10 flex justify-between items-start pointer-events-none">
                     <Image
                         src="/inspira-logo.png"
                         alt="Inspira Worldwide Logo"
                         width={300}
                         height={80}
                         priority
-                        className="pointer-events-auto object-contain w-auto h-16 md:h-20 opacity-90 transition-opacity duration-300"
+                        className="pointer-events-auto object-contain w-auto h-10 sm:h-14 md:h-20 opacity-90 transition-opacity duration-300"
                         style={{ opacity: isMenuOpen ? 0 : 0.9 }}
                     />
 
@@ -181,36 +176,15 @@ export default function HomeClient() {
                         aria-expanded={isMenuOpen}
                         aria-controls="main-navigation"
                         aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-                        className="cursor-pointer pointer-events-auto bg-white text-zinc-900 border-b-[6px] border-zinc-300 active:border-b-0 active:translate-y-[6px] px-8 py-3 rounded-full font-extrabold transition-all duration-150 shadow-[0_4px_10px_rgba(0,0,0,0.15)] uppercase tracking-wider text-sm mt-2 md:mt-3"
+                        className="cursor-pointer pointer-events-auto bg-white text-zinc-900 border-b-[4px] md:border-b-[6px] border-zinc-300 active:border-b-0 active:translate-y-[4px] md:active:translate-y-[6px] px-5 py-2 md:px-8 md:py-3 rounded-full font-extrabold transition-all duration-150 shadow-[0_4px_10px_rgba(0,0,0,0.15)] uppercase tracking-wider text-xs md:text-sm mt-1 md:mt-3"
                     >
                         {isMenuOpen ? 'Close' : 'Menu'}
                     </button>
                 </div>
 
-                {/* Hero Content - Bottom Left */}
-                <div
-                    className={`relative z-20 w-full px-6 md:px-12 pb-16 md:pb-28 flex justify-start transition-opacity duration-500 ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-                >
-                    <div className="w-fit max-w-[950px] bg-black/40 backdrop-blur-[16px] border border-white/10 p-4 md:py-8 md:pl-8 md:pr-10 rounded-[2rem] shadow-2xl">
-
-                        {/* Headline */}
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15] mb-5">
-                            Precision Distribution.<br />
-                            <span className="text-zinc-300">Expanding Your Market Reach.</span>
-                        </h1>
-
-                        {/* Sub-headline */}
-                        <p className="text-base md:text-lg text-zinc-300 leading-relaxed font-light">
-                            We are Sri Lanka's definitive pharmaceutical distribution outsourcing partner.
-                            From strategic brand building to risk-minimized logistics, we connect domestic manufacturers
-                            to patients with unmatched speed, flexibility, and absolute reliability.
-                        </p>
-
-                    </div>
-                </div>
-
             </div>
             <WhyUs />
+            <Infrastructure />
             <Services />
             <Process />
             <FAQ />

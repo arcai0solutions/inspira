@@ -207,7 +207,7 @@ export default function CollaborationClient() {
                             </h1>
 
                             <p className="collab-hero-sub text-white/70 text-lg md:text-2xl leading-[1.6] md:leading-[1.8] font-light max-w-2xl mt-8 mb-12">
-                                Transcend traditional logistics. Align with Inspira to seamlessly integrate your pharmaceutical innovations into Sri Lanka's healthcare ecosystem with absolute precision.
+                                Transcend traditional logistics. Align with Inspira to integrate your pharmaceutical innovations into Sri Lanka's healthcare ecosystem with absolute precision.
                             </p>
 
                             <div className="collab-hero-sub flex flex-col sm:flex-row gap-5 items-start">
@@ -227,7 +227,7 @@ export default function CollaborationClient() {
                                     <div className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
                                     Distribution Matrix
                                 </strong>
-                                Visualizing seamless pharmaceutical distribution from our central hub out to island-wide partners.
+                                Visualizing pharmaceutical distribution from our central hub out to island-wide partners.
                             </div>
 
                             <div className="collab-svg-container relative w-full h-full max-w-[500px] max-h-[500px] flex items-center justify-center">

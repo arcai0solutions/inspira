@@ -43,7 +43,7 @@ const ClockIcon = ({ className }: { className?: string }) => (
 
 export default function WhyUs() {
     return (
-        <section className="py-24 px-6 md:px-12 bg-white flex flex-col items-center">
+        <section className="pt-12 pb-20 md:py-24 px-6 md:px-12 bg-white flex flex-col items-center">
             <div className="w-full max-w-[1400px]">
                 {/* Header Section */}
                 <div className="mb-20 flex flex-col sm:flex-row justify-between items-start gap-4">
@@ -133,7 +133,7 @@ export default function WhyUs() {
                                 ))}
                             </div>
                             <p className="text-[#4D4D4D] font-medium text-[16px] leading-[1.4] tracking-tight mb-4">
-                                "Inspira provides the exact speed, flexibility, and robust infrastructure our manufacturing operations need to seamlessly reach patients across Sri Lanka."
+                                "Inspira provides the exact speed, flexibility, and robust infrastructure our manufacturing operations need to reach patients across Sri Lanka."
                             </p>
                             <div className="flex items-center gap-3">
                                 <div>
@@ -153,7 +153,7 @@ export default function WhyUs() {
                         <div className="bg-white rounded-[24px] p-5 border border-zinc-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex-1 flex flex-col justify-center">
                             <Shield className="w-5 h-5 text-[#121212] mb-2" />
                             <h4 className="font-bold text-[#121212] text-[15px] tracking-tight mb-1.5">Seamless Outsourcing</h4>
-                            <p className="text-[#636363] font-medium text-[14px] leading-[1.4]">We take over the complexities of warehousing, sorting, and logistics so you can focus solely on engineering life-saving therapeutics.</p>
+                            <p className="text-[#636363] font-medium text-[14px] leading-[1.4]">We take over the complexities of warehousing, sorting, and logistics so you can focus solely on developing and manufacturing quality medicines.</p>
                         </div>
                         <div className="bg-white rounded-[24px] p-5 border border-zinc-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex-1 flex flex-col justify-center">
                             <TrendingUp className="w-5 h-5 text-[#121212] mb-2" />
@@ -174,8 +174,8 @@ export default function WhyUs() {
                             Inspira Worldwide®
                         </div>
                         <div className="relative z-10 mt-auto pb-4">
-                            <h3 className="text-white text-[28px] font-bold tracking-tight mb-1.5">A Healthy Life.</h3>
-                            <p className="text-[#C0C0C0] font-medium text-[15px]">Delivering excellence across Sri Lanka.</p>
+                            <h3 className="text-white text-[28px] font-bold tracking-tight mb-1.5">Delivered Everywhere.</h3>
+                            <p className="text-[#C0C0C0] font-medium text-[15px]">Safety and care in every consignment, island-wide.</p>
                         </div>
                     </div>
 

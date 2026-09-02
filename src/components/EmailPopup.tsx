@@ -105,7 +105,7 @@ export default function EmailPopup() {
                         Want to stay up to date?
                     </h3>
                     <p className="text-zinc-300 text-[15px] leading-relaxed mb-8">
-                        Get the latest news, updates, and pharmaceutical insights directly to your inbox.
+                        Company news, partnership updates and distribution announcements, straight from our team.
                     </p>
 
                     <form onSubmit={handleSubscribe} className="w-full flex flex-col gap-3">

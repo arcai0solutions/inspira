@@ -48,7 +48,7 @@ export default function Article3Page() {
 
                     <h2 className="text-3xl text-[#121212] font-medium mt-12 mb-6 tracking-tight">Conclusion</h2>
                     <p>
-                        The evolution of pharmacy retail in Colombo is a testament to the broader modernization of Sri Lanka's healthcare system. For pharmaceutical manufacturers, partnering with a distributor that understands urban logistics and prioritizes continuous supply chain coordination is critical. At Inspira Worldwide, we continually refine our delivery flow management to ensure that life-saving medications are always within reach of the patients who need them.
+                        The evolution of pharmacy retail in Colombo is a testament to the broader modernization of Sri Lanka's healthcare system. For pharmaceutical manufacturers, partnering with a distributor that understands urban logistics and prioritizes continuous supply chain coordination is critical. At Inspira Worldwide, we continually refine our delivery flow management to ensure that essential medicines are always within reach of the patients who need them.
                     </p>
                 </div>
             </ArticleLayout>
