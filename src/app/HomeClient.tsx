@@ -128,14 +128,15 @@ export default function HomeClient() {
                 </div>
             )}
 
-            {/* Fixed 16:9 box, always fully on screen.
-                The artwork is 16:9 too, so it fits exactly at every breakpoint — no
-                zoomed-in crop on mobile. Capping the WIDTH against the viewport height
-                (max-w = availableHeight x 16/9) keeps the box inside the fold on wide or
-                short screens instead of running past it, without ever cropping the image. */}
+            {/* Full-bleed 16:9 banner, always inside the fold.
+                Width is always 100% so it runs edge to edge with the same 5px gutter as
+                the bottom. aspect-video sets the height; max-h clamps it to the viewport
+                on wide/short screens, where object-cover then takes a slight centre crop.
+                On phones and normal desktops the 16:9 height is well under the viewport,
+                so nothing clamps and the artwork is shown whole — no mobile zoom. */}
             <div
                 ref={container}
-                className="relative w-full aspect-video max-h-[calc(100vh_-_10px)] max-w-[calc((100vh_-_10px)*16/9)] mx-auto rounded-[1rem] md:rounded-[2rem] overflow-hidden"
+                className="relative w-full aspect-video max-h-[calc(100vh_-_10px)] rounded-[1rem] md:rounded-[2rem] overflow-hidden"
             >
 
                 {/* Rotating hero banners — managed from /admin/banners */}
