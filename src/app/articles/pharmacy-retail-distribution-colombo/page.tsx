@@ -13,7 +13,7 @@ export default function Article3Page() {
             <ArticleLayout
                 title="The Evolution of Pharmacy Retail Distribution in Colombo"
                 date="March 2026"
-                imageUrl="/article_pharmacy_retail.png"
+                imageUrl="/article_pharmacy_retail.jpg"
             >
                 <div className="space-y-8 text-lg text-zinc-700 leading-relaxed font-light">
                     <p>

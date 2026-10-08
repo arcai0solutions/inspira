@@ -31,7 +31,7 @@ export default function ArticlesClient() {
             id: "pharmaceutical-market-entry-sri-lanka",
             title: "Navigating Pharmaceutical Market Entry in Sri Lanka (2026 Guide)",
             description: "A comprehensive guide on regulatory compliance, local partnerships, and initial steps for foreign pharmaceutical manufacturers expanding into Sri Lanka.",
-            image_url: "/article_market_entry.png",
+            image_url: "/article_market_entry.jpg",
             date: "April 2026",
         },
         {
@@ -45,7 +45,7 @@ export default function ArticlesClient() {
             id: "pharmacy-retail-distribution-colombo",
             title: "The Evolution of Pharmacy Retail Distribution in Colombo",
             description: "Examining the shift in last-mile delivery, urban logistics, and strategies for ensuring steady pharmaceutical stock levels in retail pharmacies.",
-            image_url: "/article_pharmacy_retail.png",
+            image_url: "/article_pharmacy_retail.jpg",
             date: "March 2026",
         }
     ];

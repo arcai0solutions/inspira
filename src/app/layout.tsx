@@ -82,7 +82,8 @@ export default function RootLayout({
                 "Sri Lanka's definitive pharmaceutical distribution outsourcing partner. From strategic brand building to risk-minimized logistics.",
               address: {
                 "@type": "PostalAddress",
-                addressLocality: "Colombo",
+                streetAddress: "No. 351, Pamunugama Road, Delathura",
+                addressLocality: "Ja-Ela",
                 addressCountry: "LK",
               },
               contactPoint: {

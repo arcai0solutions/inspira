@@ -13,7 +13,7 @@ export default function Article1Page() {
             <ArticleLayout
                 title="Navigating Pharmaceutical Market Entry in Sri Lanka (2026 Guide)"
                 date="April 2026"
-                imageUrl="/article_market_entry.png"
+                imageUrl="/article_market_entry.jpg"
             >
                 <div className="space-y-8 text-lg text-zinc-700 leading-relaxed font-light">
                     <p>

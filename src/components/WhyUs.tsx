@@ -60,7 +60,7 @@ export default function WhyUs() {
                         {/* Top Image Card */}
                         <div className="relative rounded-[24px] overflow-hidden bg-[#1A1A1A] h-[140px] lg:h-[160px] p-5 flex flex-col justify-between group">
                             <Image
-                                src="/b2b-logistics.png"
+                                src="/b2b-logistics.jpg"
                                 alt="Precision Healthcare Logistics"
                                 fill
                                 className="object-cover object-top opacity-80"
@@ -165,7 +165,7 @@ export default function WhyUs() {
                     {/* Column 4: Dark Concept Card */}
                     <div className="relative rounded-[24px] overflow-hidden bg-[#1A1A1A] min-h-[220px] lg:min-h-full p-6 flex flex-col justify-between text-center group">
                         <Image
-                            src="/warehouse-vertical.png"
+                            src="/warehouse-vertical.jpg"
                             alt="Inspira Worldwide Delivery"
                             fill
                             className="object-cover object-top opacity-80"

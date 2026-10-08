@@ -218,8 +218,8 @@ export default function ContactClient() {
                                     </div>
                                     <div className="mt-auto flex flex-col gap-6">
                                         <p className="text-zinc-600 text-[15px] leading-relaxed font-light">
-                                            No. 45, Baseline Road<br />
-                                            Colombo 08<br />
+                                            No. 351, Pamunugama Road<br />
+                                            Delathura, Ja-Ela<br />
                                             Sri Lanka
                                         </p>
                                         <a href="tel:+94713876936" className="text-[#121212] text-[24px] font-medium hover:text-[#00A3FF] transition-colors tracking-tight">

@@ -106,8 +106,8 @@ export default function Footer() {
 
                         {/* Address Context */}
                         <div className="relative z-20 mt-auto pt-24 text-[#C0C0C0] text-[15px] leading-[1.6]">
-                            <p>No. 45, Baseline Road</p>
-                            <p>Colombo 08</p>
+                            <p>No. 351, Pamunugama Road</p>
+                            <p>Delathura, Ja-Ela</p>
                             <p className="font-semibold text-white">Sri Lanka</p>
                         </div>
                     </div>
