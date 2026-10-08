@@ -5,13 +5,12 @@ import Image from "next/image";
 import { Menu } from "lucide-react";
 import AdminSidebar from "./AdminSidebar";
 import { supabase } from "@/lib/supabase";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const [isLoading, setIsLoading] = useState(true);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const router = useRouter();
-    const pathname = usePathname();
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -35,10 +34,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         return () => subscription.unsubscribe();
     }, [router]);
 
-    // Close the mobile drawer on navigation.
-    useEffect(() => {
-        setSidebarOpen(false);
-    }, [pathname]);
+    // The drawer closes itself: every nav Link in AdminSidebar calls onClose,
+    // so no pathname effect is needed (and a setState in an effect would cost
+    // an extra render on every navigation).
 
     // Lock body scroll behind the mobile drawer.
     useEffect(() => {

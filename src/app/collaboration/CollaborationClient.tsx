@@ -87,7 +87,7 @@ export default function CollaborationClient() {
         });
 
         // Packets Flowing (Data/Distribution routing to nodes)
-        gsap.utils.toArray('.collab-packet').forEach((packet: any, i) => {
+        gsap.utils.toArray<SVGElement>('.collab-packet').forEach((packet, i) => {
             const endX = parseFloat(packet.getAttribute('data-endx') || '200');
             const endY = parseFloat(packet.getAttribute('data-endy') || '200');
 
@@ -109,8 +109,8 @@ export default function CollaborationClient() {
         // Floating effect for the entire SVG
         gsap.to(".collab-svg-container", { y: -15, duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut" });
 
-        const sections = gsap.utils.toArray('.reveal-section');
-        sections.forEach((section: any) => {
+        const sections = gsap.utils.toArray<HTMLElement>('.reveal-section');
+        sections.forEach((section) => {
             gsap.fromTo(section,
                 { opacity: 0, y: 60 },
                 {
@@ -141,7 +141,7 @@ export default function CollaborationClient() {
             </div>
 
             {/* Background Noise Overlay */}
-            <div className="fixed inset-0 pointer-events-none opacity-[0.04] z-0 mix-blend-overlay" style={{ backgroundImage: "url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png')", backgroundSize: "300px" }} />
+            <div className="fixed inset-0 pointer-events-none opacity-[0.04] z-0 mix-blend-overlay" style={{ backgroundImage: "url('/noise-texture.png')", backgroundSize: "300px" }} />
 
             {/* Flowing Menu Overlay */}
             <div
@@ -207,7 +207,7 @@ export default function CollaborationClient() {
                             </h1>
 
                             <p className="collab-hero-sub text-white/70 text-lg md:text-2xl leading-[1.6] md:leading-[1.8] font-light max-w-2xl mt-8 mb-12">
-                                Transcend traditional logistics. Align with Inspira to integrate your pharmaceutical innovations into Sri Lanka's healthcare ecosystem with absolute precision.
+                                Transcend traditional logistics. Align with Inspira to integrate your pharmaceutical innovations into Sri Lanka&apos;s healthcare ecosystem with absolute precision.
                             </p>
 
                             <div className="collab-hero-sub flex flex-col sm:flex-row gap-5 items-start">
@@ -372,7 +372,7 @@ export default function CollaborationClient() {
 
                     <div className="max-w-5xl mx-auto flex flex-col text-center items-center relative z-10">
                         <h2 className="reveal-section text-[45px] sm:text-[60px] md:text-[80px] lg:text-[100px] font-medium text-white leading-[1] tracking-tighter mb-10">
-                            Let's forge a <br /><span className="text-[#00A3FF]">Partnership.</span>
+                            Let&apos;s forge a <br /><span className="text-[#00A3FF]">Partnership.</span>
                         </h2>
                         <p className="reveal-section text-white/60 text-[18px] md:text-[24px] leading-[1.6] md:leading-[1.8] font-light mb-16 max-w-3xl mx-auto">
                             Connect with our business development team to architect a distribution strategy that propels your pharmaceutical brand forward in Sri Lanka.

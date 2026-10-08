@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import {
     Newspaper, MessageSquare, Briefcase, ContactRound,
@@ -358,7 +358,7 @@ export default function DashboardClient() {
                                 <div className="p-8 text-center">
                                     <StickyNote className="w-8 h-8 text-zinc-200 mx-auto mb-3" />
                                     <p className="text-sm text-zinc-400">No notes yet</p>
-                                    <p className="text-xs text-zinc-300 mt-1">Click "New Note" to get started</p>
+                                    <p className="text-xs text-zinc-300 mt-1">Click &quot;New Note&quot; to get started</p>
                                 </div>
                             ) : (
                                 notes.map((note) => (

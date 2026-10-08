@@ -38,7 +38,7 @@ export default function ArticlesClient() {
             id: "cold-chain-logistics-sri-lanka",
             title: "Overcoming Cold Chain Logistics Challenges in Tropical Climates",
             description: "How modern warehousing and distribution systems are solving temperature excursions and product wastage in Sri Lanka's pharmaceutical supply chain.",
-            image_url: "/article_cold_chain.png",
+            image_url: "/article_cold_chain.jpg",
             date: "April 2026",
         },
         {

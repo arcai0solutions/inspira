@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
-import { Plus, Trash2, Loader2, GripVertical, MoreVertical, DollarSign, Eye, X } from "lucide-react";
+import { Plus, Trash2, Loader2, GripVertical, Eye, X } from "lucide-react";
 
 interface Stage {
     id: string;
@@ -159,7 +159,7 @@ export default function CRMClient() {
             animationFrameRef.current = null;
         }
 
-        const { destination, source, draggableId } = result;
+        const { destination, source } = result;
 
         if (!destination) return;
 

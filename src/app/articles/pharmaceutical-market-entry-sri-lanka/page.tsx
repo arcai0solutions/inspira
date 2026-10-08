@@ -17,7 +17,7 @@ export default function Article1Page() {
             >
                 <div className="space-y-8 text-lg text-zinc-700 leading-relaxed font-light">
                     <p>
-                        Sri Lanka's pharmaceutical market represents a growing opportunity for foreign manufacturers seeking expansion in South Asia. With an increasing demand for specialized medicines and a progressively structured regulatory framework, the landscape is ripe for strategic entry. However, navigating the initial phases requires meticulous planning, an understanding of local compliance, and robust distribution partnerships.
+                        Sri Lanka&apos;s pharmaceutical market represents a growing opportunity for foreign manufacturers seeking expansion in South Asia. With an increasing demand for specialized medicines and a progressively structured regulatory framework, the landscape is ripe for strategic entry. However, navigating the initial phases requires meticulous planning, an understanding of local compliance, and robust distribution partnerships.
                     </p>
 
                     <h2 className="text-3xl text-[#121212] font-medium mt-12 mb-6 tracking-tight">Understanding the Regulatory Landscape</h2>
@@ -30,7 +30,7 @@ export default function Article1Page() {
 
                     <h2 className="text-3xl text-[#121212] font-medium mt-12 mb-6 tracking-tight">The Role of Local Distribution Partnerships</h2>
                     <p>
-                        Market entry goes beyond regulatory approval; getting the product from the port to the pharmacy shelf is where many foreign manufacturers face challenges. Sri Lanka's geography requires a localized logistics approach to ensure island-wide reach.
+                        Market entry goes beyond regulatory approval; getting the product from the port to the pharmacy shelf is where many foreign manufacturers face challenges. Sri Lanka&apos;s geography requires a localized logistics approach to ensure island-wide reach.
                     </p>
                     <ul className="list-disc pl-6 space-y-4 my-6">
                         <li><strong>Island-Wide Penetration:</strong> A capable distributor provides access not just to Colombo, but to regional hospitals and pharmacies across all provinces.</li>

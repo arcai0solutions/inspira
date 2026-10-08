@@ -27,9 +27,9 @@ export default function AdminLoginClient() {
             }
 
             router.push("/admin/news");
-        } catch (err: any) {
+        } catch (err) {
             console.error("Login failed:", err);
-            setError(err.message || "Invalid credentials. Please try again.");
+            setError(err instanceof Error ? err.message : "Invalid credentials. Please try again.");
         } finally {
             setLoading(false);
         }

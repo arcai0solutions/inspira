@@ -180,7 +180,7 @@ export default function ProductsClient() {
             <div
                 className="absolute inset-0 pointer-events-none opacity-[0.03]"
                 style={{
-                    backgroundImage: "url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png')",
+                    backgroundImage: "url('/noise-texture.png')",
                     backgroundSize: "400px",
                     mixBlendMode: "overlay",
                 }}

@@ -79,9 +79,9 @@ export default function AdminNewsClient() {
                 setStatus({ type: "idle", message: "" });
             }, 5000);
 
-        } catch (error: any) {
+        } catch (error) {
             console.error("Error adding news:", error);
-            setStatus({ type: "error", message: error.message || "Failed to publish article." });
+            setStatus({ type: "error", message: error instanceof Error ? error.message : "Failed to publish article." });
         } finally {
             setLoading(false);
         }

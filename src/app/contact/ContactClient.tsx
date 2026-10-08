@@ -8,7 +8,7 @@ import { useGSAP } from "@gsap/react";
 import FlowingMenu from "@/components/FlowingMenu";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { supabase } from "@/lib/supabase";
-import { MapPin, Phone, Mail, ArrowRight, Linkedin, Twitter, Instagram, Youtube, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
+import { MapPin, Mail, ArrowRight, Linkedin, Twitter, Instagram, Youtube, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(useGSAP);
@@ -89,8 +89,13 @@ export default function ContactClient() {
 
             setTimeout(() => setSubmitStatus("idle"), 5000);
 
-        } catch (error: any) {
-            const errorMessage = error?.message || error?.error_description || JSON.stringify(error) || "Unknown error";
+        } catch (error) {
+            const errorMessage =
+                error instanceof Error
+                    ? error.message
+                    : typeof error === "object" && error !== null && "error_description" in error
+                        ? String((error as { error_description: unknown }).error_description)
+                        : "Unknown error";
             console.error("Error submitting form:", errorMessage);
 
             // Log the error to the screen to help the user if they forgot to run the migration
@@ -109,7 +114,7 @@ export default function ContactClient() {
     return (
         <div ref={container} className="relative w-full flex flex-col pt-24 lg:pt-32 bg-white text-[#121212]">
             {/* Background Noise Overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png')", backgroundSize: "400px", mixBlendMode: 'overlay' }} />
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "url('/noise-texture.png')", backgroundSize: "400px", mixBlendMode: 'overlay' }} />
 
             {/* Flowing Menu Overlay */}
             <div
@@ -163,7 +168,7 @@ export default function ContactClient() {
                     {/* High Impact Full-Width Header */}
                     <div className="w-full border-b border-zinc-200 p-8 py-10 md:py-16 flex items-center justify-start md:justify-center bg-[#FAFAFA] overflow-hidden">
                         <h1 className="contact-fade-in text-[10vw] sm:text-[8vw] md:text-[80px] lg:text-[100px] font-medium leading-[0.9] tracking-tighter text-[#121212]">
-                            Let's Talk.
+                            Let&apos;s Talk.
                         </h1>
                     </div>
 
@@ -236,7 +241,7 @@ export default function ContactClient() {
                             {/* Form Header */}
                             <div className="p-8 md:p-12 xl:p-16 border-b border-zinc-200 bg-white contact-fade-in">
                                 <h2 className="text-[32px] md:text-[40px] xl:text-[48px] font-medium text-[#121212] mb-4 tracking-tight">Got a question, challenge, or idea?</h2>
-                                <p className="text-zinc-500 text-[16px] md:text-[18px] font-light">Fill out the form — we'll get back to you shortly.</p>
+                                <p className="text-zinc-500 text-[16px] md:text-[18px] font-light">Fill out the form — we&apos;ll get back to you shortly.</p>
                             </div>
 
                             {/* Form Fields */}
@@ -245,7 +250,7 @@ export default function ContactClient() {
                                 {submitStatus === "success" && (
                                     <div className="absolute top-4 left-4 right-4 z-10 bg-green-50 text-green-800 p-4 rounded-xl border border-green-200 flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
                                         <CheckCircle2 className="text-green-500 w-5 h-5" />
-                                        <span className="font-medium text-sm">Thanks for reaching out! We've received your inquiry and will be in touch soon.</span>
+                                        <span className="font-medium text-sm">Thanks for reaching out! We&apos;ve received your inquiry and will be in touch soon.</span>
                                     </div>
                                 )}
 

@@ -175,12 +175,12 @@ export default function FAQ() {
                                 Ready to partner with us?
                             </h4>
                             <p className="text-[#666666] text-[15px] md:text-[16px] leading-relaxed max-w-[90%]">
-                                Every manufacturer's needs are different. Let our experts show you how Inspira can streamline your distribution and amplify your market reach — let's have a chat and find the right solution for you.
+                                Every manufacturer&apos;s needs are different. Let our experts show you how Inspira can streamline your distribution and amplify your market reach — let&apos;s have a chat and find the right solution for you.
                             </p>
 
                             <div className="flex flex-wrap items-center gap-6 mt-4">
                                 <span className="text-[#121212] font-medium text-[15px]">
-                                    Let's have a chat
+                                    Let&apos;s have a chat
                                 </span>
                                 <a
                                     href="/contact"

@@ -58,8 +58,8 @@ export default function CareersClient() {
                 stagger: 0.1
             }, "-=0.8");
 
-        const sections = gsap.utils.toArray('.reveal-section');
-        sections.forEach((section: any) => {
+        const sections = gsap.utils.toArray<HTMLElement>('.reveal-section');
+        sections.forEach((section) => {
             gsap.fromTo(section,
                 { opacity: 0, y: 60 },
                 {
@@ -97,7 +97,7 @@ export default function CareersClient() {
             </div>
 
             {/* Background Noise Overlay */}
-            <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0" style={{ backgroundImage: "url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png')", backgroundSize: "300px" }} />
+            <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0" style={{ backgroundImage: "url('/noise-texture.png')", backgroundSize: "300px" }} />
 
             {/* Flowing Menu Overlay */}
             <div

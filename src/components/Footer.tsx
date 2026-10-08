@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight, ArrowUp, Linkedin, Twitter, Instagram, Youtube, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowUp, Linkedin, Twitter, Instagram, Youtube, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 const linksCol1 = [
@@ -97,10 +97,13 @@ export default function Footer() {
 
                         {/* Huge Center Logo */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-4 md:px-12">
-                            <img
+                            <Image
                                 src="/inspira-logo.png"
-                                alt="Inspira Logo"
-                                className="w-full max-w-[500px] md:max-w-[600px] object-contain opacity-100"
+                                alt="Inspira Worldwide Logo"
+                                width={600}
+                                height={346}
+                                sizes="(max-width: 768px) 500px, 600px"
+                                className="w-full max-w-[500px] md:max-w-[600px] h-auto object-contain opacity-100"
                             />
                         </div>
 

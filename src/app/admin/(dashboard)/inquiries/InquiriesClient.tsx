@@ -118,9 +118,9 @@ export default function InquiriesClient() {
             setInquiries(inquiries.filter(i => i.id !== inquiry.id));
             alert("Successfully moved to CRM Pipeline!");
 
-        } catch (error: any) {
+        } catch (error) {
             console.error("Error moving to CRM:", error);
-            alert(error.message || "Failed to move to CRM.");
+            alert(error instanceof Error ? error.message : "Failed to move to CRM.");
         } finally {
             setActionLoading(null);
         }
@@ -142,7 +142,7 @@ export default function InquiriesClient() {
                 </div>
                 <h3 className="text-xl font-medium text-zinc-900 mb-2">No active inquiries</h3>
                 <p className="text-zinc-500 max-w-sm">
-                    New messages submitted through your website's contact form will appear here for review.
+                    New messages submitted through your website&apos;s contact form will appear here for review.
                 </p>
             </div>
         );

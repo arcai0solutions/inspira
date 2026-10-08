@@ -13,13 +13,60 @@ const supabaseAdmin = createClient(
 
 export const maxDuration = 30;
 
+/* ------------------------------------------------------------------
+ * Abuse guards
+ *
+ * This endpoint is public and spends real money on every call, so it is
+ * rate limited per IP and the payload is capped. The limiter is in-process,
+ * which means each serverless instance keeps its own counter — enough to
+ * stop casual scraping and runaway clients. If this ever needs to be
+ * airtight across instances, move the counter to Redis/Upstash.
+ * ------------------------------------------------------------------ */
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const RATE_LIMIT_MAX_REQUESTS = 20;
+const MAX_MESSAGES = 40;
+const MAX_MESSAGE_CHARS = 4000;
+
+const hits = new Map<string, number[]>();
+
+function rateLimit(ip: string): boolean {
+    const now = Date.now();
+    const recent = (hits.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+    recent.push(now);
+    hits.set(ip, recent);
+
+    // Opportunistic cleanup so the map cannot grow without bound.
+    if (hits.size > 5000) {
+        for (const [key, times] of hits) {
+            if (times.every((t) => now - t >= RATE_LIMIT_WINDOW_MS)) hits.delete(key);
+        }
+    }
+    return recent.length <= RATE_LIMIT_MAX_REQUESTS;
+}
+
+function clientIp(req: Request): string {
+    const fwd = req.headers.get('x-forwarded-for');
+    if (fwd) return fwd.split(',')[0].trim();
+    return req.headers.get('x-real-ip') ?? 'unknown';
+}
+
+function jsonError(message: string, status: number, extraHeaders: Record<string, string> = {}) {
+    return new Response(JSON.stringify({ error: message }), {
+        status,
+        headers: { 'Content-Type': 'application/json', ...extraHeaders },
+    });
+}
+
 export async function POST(req: Request) {
     try {
         // Validate API key
         if (!process.env.OPENAI_API_KEY) {
-            return new Response(JSON.stringify({ error: 'API key not configured' }), {
-                status: 500,
-                headers: { 'Content-Type': 'application/json' },
+            return jsonError('API key not configured', 500);
+        }
+
+        if (!rateLimit(clientIp(req))) {
+            return jsonError('Too many requests. Please wait a few minutes and try again.', 429, {
+                'Retry-After': String(RATE_LIMIT_WINDOW_MS / 1000),
             });
         }
 
@@ -27,10 +74,19 @@ export async function POST(req: Request) {
 
         // Validate messages
         if (!messages || !Array.isArray(messages)) {
-            return new Response(JSON.stringify({ error: 'Messages required' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' },
-            });
+            return jsonError('Messages required', 400);
+        }
+
+        if (messages.length > MAX_MESSAGES) {
+            return jsonError('Conversation too long. Please start a new chat.', 413);
+        }
+
+        const oversized = messages.some(
+            (m: { content?: unknown }) =>
+                typeof m?.content === 'string' && m.content.length > MAX_MESSAGE_CHARS
+        );
+        if (oversized) {
+            return jsonError('Message too long.', 413);
         }
 
         // Extract the latest user message to log to Supabase
@@ -72,7 +128,9 @@ export async function POST(req: Request) {
                         notes: z.string().describe("AI-generated summary of the conversation: what the customer seemed interested in, key topics discussed, and any specific needs or requirements mentioned."),
                     }),
                     execute: async ({ name, phone, email, company, notes }) => {
-                        console.log(`Executing saveLead tool for ${name}...`);
+                        // Deliberately no PII in logs — names and emails must not
+                        // end up in the hosting provider's log retention.
+                        console.log('Executing saveLead tool');
                         try {
                             // 1. Insert into contacts table
                             const { data: contactData, error: contactError } = await supabaseAdmin
@@ -154,7 +212,8 @@ export async function POST(req: Request) {
                         topic_interest: z.string().describe("The specific service or topic the user is interested in based on the conversation (e.g., 'Island-Wide Distribution', 'Warehousing'), or 'general' if no specific interest was detected"),
                     }),
                     execute: async ({ email, name, topic_interest }) => {
-                        console.log(`Executing subscribeNewsletter tool for ${email} (topic: ${topic_interest})...`);
+                        // Topic is safe to log; the email address is not.
+                        console.log(`Executing subscribeNewsletter tool (topic: ${topic_interest})`);
                         try {
                             // Use the anon client since anonymous inserts are allowed on email_subscribers
                             const { error } = await supabase

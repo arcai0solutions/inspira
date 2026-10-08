@@ -14,7 +14,7 @@ export default function AdminLoginPage() {
             {/* Background Effects */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#00A3FF]/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#38bdf8]/5 rounded-full blur-[80px] pointer-events-none translate-y-1/2 -translate-x-1/4" />
-            <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png')", backgroundSize: "400px", mixBlendMode: 'overlay' }} />
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "url('/noise-texture.png')", backgroundSize: "400px", mixBlendMode: 'overlay' }} />
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
                 <div className="flex justify-center mb-8">

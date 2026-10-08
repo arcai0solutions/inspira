@@ -13,7 +13,7 @@ export default function Article2Page() {
             <ArticleLayout
                 title="Overcoming Cold Chain Logistics Challenges in Tropical Climates"
                 date="April 2026"
-                imageUrl="/article_cold_chain.png"
+                imageUrl="/article_cold_chain.jpg"
             >
                 <div className="space-y-8 text-lg text-zinc-700 leading-relaxed font-light">
                     <p>
@@ -40,7 +40,7 @@ export default function Article2Page() {
 
                     <h2 className="text-3xl text-[#121212] font-medium mt-12 mb-6 tracking-tight">Securing the Last Mile</h2>
                     <p>
-                        While central storage is highly controlled, the "last mile" of delivery to regional hospitals and local pharmacies is where the cold chain is most vulnerable. 
+                        While central storage is highly controlled, the &quot;last mile&quot; of delivery to regional hospitals and local pharmacies is where the cold chain is most vulnerable. 
                     </p>
                     <p>
                         To mitigate this, industry leaders utilize specialized reefer (refrigerated) vehicles equipped with active cooling systems and GPS-enabled temperature loggers. For smaller deliveries, advanced passive cooling solutions—such as phase change materials (PCMs) and vacuum insulated panels (VIPs)—are deployed to maintain strict temperature controls even during extended transit times to remote areas.

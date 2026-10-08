@@ -45,7 +45,7 @@ export default function AboutClient() {
     return (
         <div ref={container} className="relative w-full flex flex-col pt-24 lg:pt-32 bg-white text-[#121212]">
             {/* Background Noise Overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png')", backgroundSize: "400px", mixBlendMode: 'overlay' }} />
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "url('/noise-texture.png')", backgroundSize: "400px", mixBlendMode: 'overlay' }} />
 
             {/* Flowing Menu Overlay */}
             <div
@@ -121,7 +121,7 @@ export default function AboutClient() {
                                 A dynamic distribution specialist serving domestic pharmaceutical manufacturers in Sri Lanka. As the exclusive marketing and distribution arm of Newgen Lanka Healthcare Pvt Ltd, while also supporting other local manufacturers, Inspira delivers integrated solutions across promotions, marketing, brand building, and distribution.
                             </p>
                             <p className="about-fade-in text-zinc-600 text-lg leading-relaxed font-light">
-                                With strong industry knowledge, valuable market connections, and a commitment to service excellence, Inspira helps partners navigate the demands of the modern pharmaceutical market with confidence. The company's focus remains on quality, innovation, and creating meaningful impact for patients through every product in its portfolio.
+                                With strong industry knowledge, valuable market connections, and a commitment to service excellence, Inspira helps partners navigate the demands of the modern pharmaceutical market with confidence. The company&apos;s focus remains on quality, innovation, and creating meaningful impact for patients through every product in its portfolio.
                             </p>
                         </div>
 
@@ -134,7 +134,7 @@ export default function AboutClient() {
                                     Our direction is shaped by a clear vision, a meaningful mission, and values that guide every decision.
                                 </h3>
                                 <p className="about-fade-in text-zinc-600 text-lg leading-relaxed font-light mb-6">
-                                    Inspira's vision is to strengthen its position as one of Sri Lanka's leading pharmaceutical distribution companies through long-term business relationships, technology, innovation, and customized solutions.
+                                    Inspira&apos;s vision is to strengthen its position as one of Sri Lanka&apos;s leading pharmaceutical distribution companies through long-term business relationships, technology, innovation, and customized solutions.
                                 </p>
                                 <p className="about-fade-in text-zinc-600 text-lg leading-relaxed font-light mb-8">
                                     Its mission is simple yet powerful: to support a healthier life by improving the quality and health of every Sri Lankan through high-quality products and services, customer-focused initiatives, and dependable results.
@@ -172,7 +172,7 @@ export default function AboutClient() {
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     <h4 className="text-[20px] font-medium mb-4">People-First Expertise</h4>
                                     <p className="text-white/70 font-light leading-relaxed text-lg">
-                                        Inspira's promotions and marketing teams provide straightforward and effective support using trusted methods and practical market expertise. The company works closely with partners to establish and grow their presence in the local market through strategies aligned with their broader business goals.
+                                        Inspira&apos;s promotions and marketing teams provide straightforward and effective support using trusted methods and practical market expertise. The company works closely with partners to establish and grow their presence in the local market through strategies aligned with their broader business goals.
                                     </p>
                                 </div>
 

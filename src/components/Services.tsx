@@ -62,7 +62,7 @@ export default function Services() {
             <div className="w-full bg-[#0A1128] rounded-[2rem] relative overflow-hidden flex flex-col p-6 md:p-16 lg:p-24 pb-24 md:pb-16 gap-0">
 
                 {/* Background Noise Overlay */}
-                <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png')", backgroundSize: "400px", mixBlendMode: 'overlay', transform: "translateX(15%)" }} />
+                <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "url('/noise-texture.png')", backgroundSize: "400px", mixBlendMode: 'overlay', transform: "translateX(15%)" }} />
 
                 {/* Left Column: Heading */}
                 <div className="relative z-10 flex-shrink-0 pt-8 md:pt-0 mb-12 md:mb-20">
